@@ -52,6 +52,14 @@ When has a program been sufficiently tested? A test adequacy criterion such as M
 Mutants can survive if their output is correct for any given test case. Survivors are analyzed to improve test cases. However, some (equivalent) mutants might never be killed. Mutant Score is defined as `#killed_mutants / #total_mutants`.
 
 
+### Unit Testing
+Testing an individual module / component of a system. In practice, this is testing of a single method or class. [(wiki)](https://en.wikipedia.org/wiki/Unit_testing)
 
+### Integration Testing
+Testing the multiple parts of the system as a group. Typically it follows after modules have been unit tested. [(wiki)](https://en.wikipedia.org/wiki/Integration_testing)
+
+* *big-band* - modules are coupled together to form a complete system that is tested
+* *top-down* - start with highest level module and then test step by step down incrementally
+* *bottom-up* - start with the lowest level module, test your way up by integrating
 
 
