@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../software-testing/white-box.html" class="active"><strong aria-hidden="true">2.1.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/black-box.html"><strong aria-hidden="true">2.2.</strong> Black Box Testing</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../software-testing/white-box.html" class="active"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -184,20 +184,29 @@
 <p>Static Analysis is one of the most powerful tools, leveraging compilers and linting is a must.</p>
 <h3 id="control-flow-testing"><a class="header" href="#control-flow-testing">Control-Flow Testing</a></h3>
 <p>Testing coverage is a measure of completeness of the set of test cases and shows how much code has been exercised during testing.</p>
-<h5 id="level-1-statement-coverage"><a class="header" href="#level-1-statement-coverage">Level 1 Statement Coverage</a></h5>
-<p>Weakest criteria, ensures that every statement in code has been executed at least once.</p>
-<h5 id="level-2-decision-coverage"><a class="header" href="#level-2-decision-coverage">Level 2 Decision Coverage</a></h5>
-<p>Ensures that the decision of all branches has been taken at least once. Includes statement coverage.</p>
-<h5 id="level-3-condition-coverage"><a class="header" href="#level-3-condition-coverage">Level 3 Condition Coverage</a></h5>
-<p>Ensures that every "simple" condition has been evaluated with both true and false. This doesn't mean that all "composite" conditions have been extensively evaluated.</p>
-<h5 id="level-4-decisioncondition-coverage"><a class="header" href="#level-4-decisioncondition-coverage">Level 4 Decision/Condition Coverage</a></h5>
-<p>All conditions and decisions is evaluated with both values. In this case decisions can be the composition of multiple conditions.</p>
-<h5 id="level-5-multiple-condition-coverage"><a class="header" href="#level-5-multiple-condition-coverage">Level 5 Multiple Condition Coverage</a></h5>
-<p>Requires that all combinations of "simple" conditions are covered.</p>
-<h5 id="level-6-modified-conditiondecision-coverage"><a class="header" href="#level-6-modified-conditiondecision-coverage">Level 6 Modified Condition/Decision Coverage</a></h5>
-<p>Requires that all decisions have been covered, that all simple conditions have been evaluated with both true and false, and that each simple condition within all compound conditions has been shown to independently effect outcome of the compound condition.</p>
-<h5 id="level-7-full-path-coverage"><a class="header" href="#level-7-full-path-coverage">Level 7 Full Path Coverage</a></h5>
-<p>Fully exhaustive white box testing, but tends to be infeasible.</p>
+<ul>
+<li>
+<p><strong>Level 1 Statement Coverage</strong> - Weakest criteria, ensures that every statement in code has been executed at least once.</p>
+</li>
+<li>
+<p><strong>Level 2 Decision Coverage</strong> - Ensures that the decision of all branches has been taken at least once. Includes statement coverage.</p>
+</li>
+<li>
+<p><strong>Level 3 Condition Coverage</strong> - Ensures that every "simple" condition has been evaluated with both true and false. This doesn't mean that all "composite" conditions have been extensively evaluated.</p>
+</li>
+<li>
+<p><strong>Level 4 Decision/Condition Coverage</strong> - All conditions and decisions is evaluated with both values. In this case decisions can be the composition of multiple conditions.</p>
+</li>
+<li>
+<p><strong>Level 5 Multiple Condition Coverage</strong> - Requires that all combinations of "simple" conditions are covered.</p>
+</li>
+<li>
+<p><strong>Level 6 Modified Condition/Decision Coverage</strong> - Requires that all decisions have been covered, that all simple conditions have been evaluated with both true and false, and that each simple condition within all compound conditions has been shown to independently effect outcome of the compound condition.</p>
+</li>
+<li>
+<p><strong>Level 7 Full Path Coverage</strong> - Fully exhaustive white box testing, but tends to be infeasible.</p>
+</li>
+</ul>
 <h3 id="data-flow-testing"><a class="header" href="#data-flow-testing">Data-Flow Testing</a></h3>
 <p>The aim is to trim the set of test cases that we are interested in. Increases the chance of spending more time looking at paths that include potential software faults.</p>
 <ul>
@@ -224,7 +233,7 @@ A code mutant is a version of the software under test that underwent some form o
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../software-testing/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../software-testing/srs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -238,7 +247,7 @@ A code mutant is a version of the software under test that underwent some form o
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../software-testing/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../software-testing/srs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Knowledge Base</title>
-        <meta name="robots" content="noindex">
+        <title>Software Requirements Specification - Knowledge Base</title>
 
 
         <!-- Custom HTML head -->
@@ -13,21 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -36,7 +35,7 @@
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -89,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../software-testing/srs.html" class="active"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -145,7 +144,7 @@
                     <h1 class="menu-title">Knowledge Base</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -174,11 +173,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="knowledge-base"><a class="header" href="#knowledge-base">Knowledge Base</a></h1>
-<p>My personal collection of Computer Science/Security knowledge that I find important. A work in progress.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="software-testing"><a class="header" href="#software-testing">Software Testing</a></h1>
-<p>Software Testing is closely coupled with Requirements Engineering and Software Verification, however this section mostly covers important testing techniques and construction of test plans as well as software requirements.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="srs"><a class="header" href="#srs">SRS</a></h1>
+                        <h1 id="srs"><a class="header" href="#srs">SRS</a></h1>
 <p>An SRS document supplies the reader with all the necessary information to understand the Functional and Non-Functional Requirements. The following is a template:</p>
 <h4 id="introduction"><a class="header" href="#introduction">Introduction</a></h4>
 <ul>
@@ -385,68 +380,18 @@ which functions under specific circumstances. These are not functional requireme
 themselves, but they may imply certain functional requirements to enforce the rules.</p>
 </li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="white-box-testing"><a class="header" href="#white-box-testing">White-Box Testing</a></h1>
-<p>Performing tests on software with the source code available. Generally, one should follow the following methodology:</p>
-<ol>
-<li>Make a prioritized list of your "nightmares".</li>
-<li>Which bugs can lead to the nightmares?</li>
-<li>Apply testing techniques that are best suited for detecting these bugs.</li>
-<li>Gather enough evidence to that there the likelihood of a nightmare scenario is negligible, at which point stop testing.</li>
-</ol>
-<p>Static Analysis is one of the most powerful tools, leveraging compilers and linting is a must.</p>
-<h3 id="control-flow-testing"><a class="header" href="#control-flow-testing">Control-Flow Testing</a></h3>
-<p>Testing coverage is a measure of completeness of the set of test cases and shows how much code has been exercised during testing.</p>
-<ul>
-<li>
-<p><strong>Level 1 Statement Coverage</strong> - Weakest criteria, ensures that every statement in code has been executed at least once.</p>
-</li>
-<li>
-<p><strong>Level 2 Decision Coverage</strong> - Ensures that the decision of all branches has been taken at least once. Includes statement coverage.</p>
-</li>
-<li>
-<p><strong>Level 3 Condition Coverage</strong> - Ensures that every "simple" condition has been evaluated with both true and false. This doesn't mean that all "composite" conditions have been extensively evaluated.</p>
-</li>
-<li>
-<p><strong>Level 4 Decision/Condition Coverage</strong> - All conditions and decisions is evaluated with both values. In this case decisions can be the composition of multiple conditions.</p>
-</li>
-<li>
-<p><strong>Level 5 Multiple Condition Coverage</strong> - Requires that all combinations of "simple" conditions are covered.</p>
-</li>
-<li>
-<p><strong>Level 6 Modified Condition/Decision Coverage</strong> - Requires that all decisions have been covered, that all simple conditions have been evaluated with both true and false, and that each simple condition within all compound conditions has been shown to independently effect outcome of the compound condition.</p>
-</li>
-<li>
-<p><strong>Level 7 Full Path Coverage</strong> - Fully exhaustive white box testing, but tends to be infeasible.</p>
-</li>
-</ul>
-<h3 id="data-flow-testing"><a class="header" href="#data-flow-testing">Data-Flow Testing</a></h3>
-<p>The aim is to trim the set of test cases that we are interested in. Increases the chance of spending more time looking at paths that include potential software faults.</p>
-<ul>
-<li>All <em>Def-Use</em> Paths: test cases must exercise all paths that involve a definition and use of variables of interest.</li>
-</ul>
-<h3 id="test-adequacy"><a class="header" href="#test-adequacy">Test Adequacy</a></h3>
-<p>When has a program been sufficiently tested? A test adequacy criterion such as Mutant Score, reveals how well our test cases are performing.</p>
-<blockquote>
-<p><strong>Definition:</strong>
-A code mutant is a version of the software under test that underwent some form of mutation, for example, arithmetic operators have been replaced.</p>
-</blockquote>
-<p>Mutants can survive if their output is correct for any given test case. Survivors are analyzed to improve test cases. However, some (equivalent) mutants might never be killed. Mutant Score is defined as <code>#killed_mutants / #total_mutants</code>.</p>
-<h3 id="unit-testing"><a class="header" href="#unit-testing">Unit Testing</a></h3>
-<p>Testing an individual module / component of a system. In practice, this is testing of a single method or class. <a href="https://en.wikipedia.org/wiki/Unit_testing">(wiki)</a></p>
-<h3 id="integration-testing"><a class="header" href="#integration-testing">Integration Testing</a></h3>
-<p>Testing the multiple parts of the system as a group. Typically it follows after modules have been unit tested. <a href="https://en.wikipedia.org/wiki/Integration_testing">(wiki)</a></p>
-<ul>
-<li><em>big-band</em> - modules are coupled together to form a complete system that is tested</li>
-<li><em>top-down</em> - start with highest level module and then test step by step down incrementally</li>
-<li><em>bottom-up</em> - start with the lowest level module, test your way up by integrating</li>
-</ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="black-box-testing"><a class="header" href="#black-box-testing">Black Box Testing</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../software-testing/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
+                            <a rel="next prefetch" href="../software-testing/white-box.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -454,7 +399,13 @@ A code mutant is a version of the software under test that underwent some form o
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../software-testing/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
+                    <a rel="next prefetch" href="../software-testing/white-box.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -467,21 +418,16 @@ A code mutant is a version of the software under test that underwent some form o
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 
-        <script>
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
 
     </div>
     </body>
