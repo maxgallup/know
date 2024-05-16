@@ -13,26 +13,19 @@ Static Analysis is one of the most powerful tools, leveraging compilers and lint
 
 Testing coverage is a measure of completeness of the set of test cases and shows how much code has been exercised during testing.
 
-##### Level 1 Statement Coverage
-Weakest criteria, ensures that every statement in code has been executed at least once.
+* **Level 1 Statement Coverage** - Weakest criteria, ensures that every statement in code has been executed at least once.
 
-##### Level 2 Decision Coverage
-Ensures that the decision of all branches has been taken at least once. Includes statement coverage.
+* **Level 2 Decision Coverage** - Ensures that the decision of all branches has been taken at least once. Includes statement coverage.
 
-##### Level 3 Condition Coverage
-Ensures that every "simple" condition has been evaluated with both true and false. This doesn't mean that all "composite" conditions have been extensively evaluated.
+* **Level 3 Condition Coverage** - Ensures that every "simple" condition has been evaluated with both true and false. This doesn't mean that all "composite" conditions have been extensively evaluated.
 
-##### Level 4 Decision/Condition Coverage
-All conditions and decisions is evaluated with both values. In this case decisions can be the composition of multiple conditions.
+* **Level 4 Decision/Condition Coverage** - All conditions and decisions is evaluated with both values. In this case decisions can be the composition of multiple conditions.
 
-##### Level 5 Multiple Condition Coverage
-Requires that all combinations of "simple" conditions are covered.
+* **Level 5 Multiple Condition Coverage** - Requires that all combinations of "simple" conditions are covered.
 
-##### Level 6 Modified Condition/Decision Coverage
-Requires that all decisions have been covered, that all simple conditions have been evaluated with both true and false, and that each simple condition within all compound conditions has been shown to independently effect outcome of the compound condition.
+* **Level 6 Modified Condition/Decision Coverage** - Requires that all decisions have been covered, that all simple conditions have been evaluated with both true and false, and that each simple condition within all compound conditions has been shown to independently effect outcome of the compound condition.
 
-##### Level 7 Full Path Coverage
-Fully exhaustive white box testing, but tends to be infeasible.
+* **Level 7 Full Path Coverage** - Fully exhaustive white box testing, but tends to be infeasible.
 
 
 ### Data-Flow Testing
