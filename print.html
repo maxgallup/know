@@ -441,6 +441,60 @@ A code mutant is a version of the software under test that underwent some form o
 <li><em>bottom-up</em> - start with the lowest level module, test your way up by integrating</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="black-box-testing"><a class="header" href="#black-box-testing">Black Box Testing</a></h1>
+<p>Testing when the source code is not available.</p>
+<h1 id="techniques"><a class="header" href="#techniques">Techniques</a></h1>
+<h3 id="bva---boundary-value-analysis"><a class="header" href="#bva---boundary-value-analysis">BVA - Boundary Value Analysis</a></h3>
+<p>For mechanisms that have input ranges, apply test cases that position themselves at the boundaries of those ranges. For each of the following test just above and just below:</p>
+<ul>
+<li>min</li>
+<li>nominal</li>
+<li>max</li>
+</ul>
+<h3 id="ep---equivalence-partitioning"><a class="header" href="#ep---equivalence-partitioning">EP - Equivalence Partitioning</a></h3>
+<p>If the program creates classes from the input, make sure all classes are represented. Can be done by finding representative values in the input domain or the output domain. If there are multiple input variables there are the following:</p>
+<ul>
+<li>Unidimensional partition - only focus on one variable at a time and ignore the others.</li>
+<li>Multidimensional partition - test all variables in all possible combinations</li>
+</ul>
+<h3 id="mbt---model-based-testing"><a class="header" href="#mbt---model-based-testing">MBT - Model Based Testing</a></h3>
+<p>A model is made from requirements and generates test cases. Use different notations such as pre/post conditions.</p>
+<ul>
+<li>
+<p>Input domain models: Combinatorial Design</p>
+<ul>
+<li>assist the design of the test cases and offer a significant reduction in the number of test cases</li>
+</ul>
+</li>
+<li>
+<p>Input domain models: Syntax Testing</p>
+<ul>
+<li>used to verify that a module that accepts input from another module does not fail when presented ill-formed input</li>
+<li>The syntax is the model of the input, Inputs are specified in SRS using a grammar or a context-free language</li>
+<li>used to test compilers!</li>
+</ul>
+</li>
+<li>
+<p>Behavior Models:</p>
+<ul>
+<li>Test the use cases, capture system's functional requirements from user's perspective</li>
+<li>Decision Tables - used to concisely and completely show complex rules and their resulting actions: test cases can be
+<ul>
+<li>at least one test case for each rule</li>
+<li>if the rule is a range of values combine DT and BVA</li>
+</ul>
+</li>
+<li>Cause-effect graphs / dependency modeling - design test cases for functions that depend on a combination of more input items</li>
+<li>State Machines - test cases should:
+<ul>
+<li>visit all states</li>
+<li>trigger all events at least once</li>
+<li>exercise all transitions</li>
+<li>execute all paths at least once</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
