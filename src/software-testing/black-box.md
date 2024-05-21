@@ -3,8 +3,6 @@
 Testing when the source code is not available.
 
 
-
-
 # Techniques
 
 ### BVA - Boundary Value Analysis

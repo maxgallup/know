@@ -51,7 +51,7 @@ Testing an individual module / component of a system. In practice, this is testi
 ### Integration Testing
 Testing the multiple parts of the system as a group. Typically it follows after modules have been unit tested. [(wiki)](https://en.wikipedia.org/wiki/Integration_testing)
 
-* *big-band* - modules are coupled together to form a complete system that is tested
+* *big-bang* - modules are coupled together to form a complete system that is tested
 * *top-down* - start with highest level module and then test step by step down incrementally
 * *bottom-up* - start with the lowest level module, test your way up by integrating
 
