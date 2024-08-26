@@ -1,3 +1,4 @@
 # Knowledge Base
 
-My personal collection of Computer Science/Security knowledge that I find important. A work in progress.
+A hierarchically organized knowledge-base of things I am learning. Forever a _work in progress_.
+
