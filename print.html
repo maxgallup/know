@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -494,6 +494,92 @@ A code mutant is a version of the software under test that underwent some form o
 </li>
 </ul>
 </li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advanced-operating-systems"><a class="header" href="#advanced-operating-systems">Advanced Operating Systems</a></h1>
+<p>An operating system is comprised of many layers of abstraction where each layer generally takes on a different responsibility. At the lowest level is the <strong>kernel</strong> which interacts directly with the hardware and runs with the highest level of privilege. Then the kernel is wrapped in a <em>"shell"</em> of <strong>system software</strong>. These are user space programs that interact with the kernel and provide critical functionality. Lastly, there is an optional <strong>desktop environment</strong> that provides a graphical user interface, if the OS is being used directly by end users.</p>
+<pre><code>     +--------------------------+
+     |   Desktop Environment    |
+     |  +--------------------+  |
+     |  |  System Software   |  |
+     |  |  +--------------+  |  |
+     |  |  |    Kernel    |  |  |
+     |  |  | +----------+ |  |  |
+     |  |  | | Hardware | |  |  |
+     +--------------------------+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="genesis-x86-64"><a class="header" href="#genesis-x86-64">Genesis (x86-64)</a></h1>
+<p>After pressing the power on button:</p>
+<ol>
+<li>CPU executes code in ROM.</li>
+<li>Loads firmware BIOS, UEFI, Coreboot, OpenFirmware into memory</li>
+<li>Initializes memory and other devices</li>
+<li>Loads boot code into memory, traditionally first sector was boot code</li>
+</ol>
+<p>Traditional <strong>two-stage bootloader</strong> is there for historical reasons, since there were only 512bytes available for the first boot section. Thus, it must simply load the second stage boot code with more memory available.</p>
+<h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
+<ul>
+<li>When booting why is it required to go through all modes?</li>
+<li>How is ROM code updated on older hardware?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="physical-memory"><a class="header" href="#physical-memory">Physical Memory</a></h1>
+<p>The memory controller communicates on the BUS over different channels (usually 1 / 2), but only one <strong>channel</strong> can be active at a time. For each channel there are physical memory modules (<a href="https://en.wikipedia.org/wiki/DIMM">DIMMs</a>). One side of the <strong>DIMM</strong> is a <strong>rank</strong>, typically 1/2 ranks per DIMM. Each rank has a <strong>chip</strong>, with a number of <strong>rows and columns</strong>.</p>
+<p>Linux organizes memory into consecutive page frames and grouped together in the following way:</p>
+<ul>
+<li>Nodes - <a href="https://en.wikipedia.org/wiki/Non-uniform_memory_access">NUMA</a> abstraction for N "banks"</li>
+<li>Zones - tagged regions within each node</li>
+<li>Pages - Physical page frames from each zone</li>
+</ul>
+<p>Linux Zone ranges:</p>
+<ul>
+<li>ZONE_DMA: 0 - 16MB <em>for legacy hardware</em></li>
+<li>ZONE_DMA32: 16MB - 4GB <em>for legacy hardware</em></li>
+<li>ZONE_NORMAL: 16MB - 896MB <em>for kernel</em></li>
+<li>ZONE_HIGHMEM: 896MB - END <em>used for kmap, on demand memory mapping x86</em></li>
+</ul>
+<p>Zones are managed independently, however boundaries become blurry when under pressure. Kernel daemon kswapd will reclaim memory when certain thresholds are crossed. Virtual memory mapping on x86-32 starts ZONE_DMA and ZONE_NORMAL directly after the PAGE_OFFSET and ZONE_HIGHMEM is mapped on demand. The PAGE_OFFSET is where the user space processes start. However, for x86-64 there are 47 bits of memory address space available, so it can simply map all zones into one continuous region.</p>
+<h2 id="pages"><a class="header" href="#pages">Pages</a></h2>
+<ul>
+<li>4KB of physical memory</li>
+<li><code>linux/mmzone.h</code> has mem_map array which holds page objects</li>
+</ul>
+<h1 id="allocators"><a class="header" href="#allocators">Allocators</a></h1>
+<p>Linux has one main page allocator (Buddy allocator) which allocates contiguous areas of physical memory. All allocators custom to the kernel from different subsystems interact with it. The Memblock allocator is an early boot-time allocator, discarded after initialization and contains two simple data structures: all present memory and allocated memory regions. Memblock has the following procedures:</p>
+<p>Setup: add all available physical memory regions, add reserved to reserved list, sort by base address
+Allocation: first fit memory, add to reserved list and merge neighbors if possible
+De-allocation: scans reserved list, split up regions if necessary</p>
+<h2 id="buddy-allocator"><a class="header" href="#buddy-allocator">Buddy Allocator</a></h2>
+<p>Power of two allocator with free coalescing. During allocation, requested size will go into a block that satisfies the size, unused remainders are inevitable. During de-allocation, neighboring buddy block is checked and coalesced if it is free (recursively). MAX_ORDER in linux specifies a power of two coefficient for the maximum number of orders (levels). Works at a per-zone separation.</p>
+<h3 id="fragmentation"><a class="header" href="#fragmentation">Fragmentation</a></h3>
+<ul>
+<li><strong>External fragmentation</strong> When a request for a large amount of memory comes in, although there might be enough memory for it, it is unable to be allocated due to many disjoint holes of unallocated space.
+<ul>
+<li>Solved by the <code>vmalloc</code> allocator which sits on top of buddy allocator for large allocations, uses first-fit technique and maps page frames in virtually continuous buffer to scattered pages across physical memory. Allocates a single page from the buddy allocator at a time.</li>
+</ul>
+</li>
+<li><strong>Internal fragmentation</strong> Allocations smaller than 4Kb will always have wasted space, as well as when requests are just above the closest power of two.
+<ul>
+<li>Addressed with the <code>slab</code> allocator which also sits on top of buddy allocator. For small allocations, continuous in virtual memory as well as physical memory</li>
+</ul>
+</li>
+</ul>
+<h3 id="sanity-checks-during-development"><a class="header" href="#sanity-checks-during-development">Sanity Checks during development</a></h3>
+<ul>
+<li><code>CONFIG_DEBUG_PAGEALLOC</code>
+<ol>
+<li>Out of bounds detection, adds page guards before and after page which limits how far out of bounds accesses can go. Page canaries will be changed if magic value is changed are also possible.</li>
+<li>Use after free detection (<code>kernel_map_pages</code>) simply unmaps virtual memory interrupt handled by MMU, accept for when it is reused again. Can also use page poisoning which lets us lazily detect write-after-frees, however also after page is reused, no longer protected</li>
+<li><code>kmemcheck</code> - traps at every read to check if data is initialized, very expensive</li>
+<li><code>kmemleak</code> - periodic garbage collection, reports about unlinked objects, false positives can happen</li>
+<li><code>kasan</code> - compiler instrumentation, adds combines canary and poison ideas</li>
+</ol>
+</li>
+</ul>
+<h1 id="questions-1"><a class="header" href="#questions-1">Questions</a></h1>
+<ul>
+<li>Holes in physical memory are either device mapped or reserved - might the BIOS reserve memory regions?</li>
+<li>Why does the kernel have to use virtual memory addresses in the first place can't it just map directly</li>
+<li>Padding added to zone struct caching?</li>
+<li>Why does memblock sort by base address?</li>
 </ul>
 
                     </main>
