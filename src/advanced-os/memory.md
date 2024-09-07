@@ -10,7 +10,7 @@ Linux organizes memory into consecutive page frames and grouped together in the 
 Linux Zone ranges:
 * ZONE_DMA: 0 - 16MB _for legacy hardware_
 * ZONE_DMA32: 16MB - 4GB _for legacy hardware_
-* ZONE_NORMAL: 16MB - 896MB _for kernel_
+* ZONE_NORMAL: 16MB - 896MB _for kernel - always mapped_
 * ZONE_HIGHMEM: 896MB - END _used for kmap, on demand memory mapping x86_
 
 Zones are managed independently, however boundaries become blurry when under pressure. Kernel daemon kswapd will reclaim memory when certain thresholds are crossed. Virtual memory mapping on x86-32 starts ZONE_DMA and ZONE_NORMAL directly after the PAGE_OFFSET and ZONE_HIGHMEM is mapped on demand. The PAGE_OFFSET is where the user space processes start. However, for x86-64 there are 47 bits of memory address space available, so it can simply map all zones into one continuous region.
@@ -28,9 +28,24 @@ Setup: add all available physical memory regions, add reserved to reserved list,
 Allocation: first fit memory, add to reserved list and merge neighbors if possible
 De-allocation: scans reserved list, split up regions if necessary
 
+## Memblock Boot Allocator
+Can only allocate memory and maintains an index to the next free block. It's essentially just one long array of bytes.
+
 
 ## Buddy Allocator
 Power of two allocator with free coalescing. During allocation, requested size will go into a block that satisfies the size, unused remainders are inevitable. During de-allocation, neighboring buddy block is checked and coalesced if it is free (recursively). MAX_ORDER in linux specifies a power of two coefficient for the maximum number of orders (levels). Works at a per-zone separation.
+
+# vmalloc vs slab allocator
+* vmalloc
+    * plugs in small holes and prevents external fragmentation
+    * is better for very large allocations, since buddy/slab will then cause more external fragmentation
+    * is slower than slab
+    * uses non-contiguous physical memory
+    * has its own range
+* slab allocator
+    * is very fast, since it uses a cache
+    * uses contiguous physical memory
+
 
 ### Fragmentation
 * __External fragmentation__ When a request for a large amount of memory comes in, although there might be enough memory for it, it is unable to be allocated due to many disjoint holes of unallocated space.
@@ -45,9 +60,17 @@ Power of two allocator with free coalescing. During allocation, requested size w
     1. `kmemcheck` - traps at every read to check if data is initialized, very expensive
     1. `kmemleak` - periodic garbage collection, reports about unlinked objects, false positives can happen
     1. `kasan` - compiler instrumentation, adds combines canary and poison ideas
+* out of bounds detection only works for off-by-one errors, page-guard vs poison strategy performance difference is non-trivial, but generally page-guards are faster
 
-# Questions
-* Holes in physical memory are either device mapped or reserved - might the BIOS reserve memory regions?
-* Why does the kernel have to use virtual memory addresses in the first place can't it just map directly
+
+# Questions and Answers
+* Holes in physical memory are either device mapped or reserved, what reserves them?
+    * BIOS reserves memory as well 
+ * might the BIOS reserve memory regions? some holes backed by memory. Some should escape memory management logic
+
+* Why does the kernel have to use virtual memory addresses in the first place can't it just map directly?
+    * needs to provide memory separation for clients
 * Padding added to zone struct caching?
-* Why does memblock sort by base address?
+    * Cache sharing issues for multicore processors. Ping Pong effect can happen.
+* Why do we need zones? - tag memory to differentiate for different purposes surface access only software cares about it, but devices might have hardware limitations.
+* Why do we need  pages? - since hardware provided page granularity
