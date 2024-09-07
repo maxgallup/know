@@ -185,7 +185,7 @@
 <ul>
 <li>ZONE_DMA: 0 - 16MB <em>for legacy hardware</em></li>
 <li>ZONE_DMA32: 16MB - 4GB <em>for legacy hardware</em></li>
-<li>ZONE_NORMAL: 16MB - 896MB <em>for kernel</em></li>
+<li>ZONE_NORMAL: 16MB - 896MB <em>for kernel - always mapped</em></li>
 <li>ZONE_HIGHMEM: 896MB - END <em>used for kmap, on demand memory mapping x86</em></li>
 </ul>
 <p>Zones are managed independently, however boundaries become blurry when under pressure. Kernel daemon kswapd will reclaim memory when certain thresholds are crossed. Virtual memory mapping on x86-32 starts ZONE_DMA and ZONE_NORMAL directly after the PAGE_OFFSET and ZONE_HIGHMEM is mapped on demand. The PAGE_OFFSET is where the user space processes start. However, for x86-64 there are 47 bits of memory address space available, so it can simply map all zones into one continuous region.</p>
@@ -199,8 +199,28 @@
 <p>Setup: add all available physical memory regions, add reserved to reserved list, sort by base address
 Allocation: first fit memory, add to reserved list and merge neighbors if possible
 De-allocation: scans reserved list, split up regions if necessary</p>
+<h2 id="memblock-boot-allocator"><a class="header" href="#memblock-boot-allocator">Memblock Boot Allocator</a></h2>
+<p>Can only allocate memory and maintains an index to the next free block. It's essentially just one long array of bytes.</p>
 <h2 id="buddy-allocator"><a class="header" href="#buddy-allocator">Buddy Allocator</a></h2>
 <p>Power of two allocator with free coalescing. During allocation, requested size will go into a block that satisfies the size, unused remainders are inevitable. During de-allocation, neighboring buddy block is checked and coalesced if it is free (recursively). MAX_ORDER in linux specifies a power of two coefficient for the maximum number of orders (levels). Works at a per-zone separation.</p>
+<h1 id="vmalloc-vs-slab-allocator"><a class="header" href="#vmalloc-vs-slab-allocator">vmalloc vs slab allocator</a></h1>
+<ul>
+<li>vmalloc
+<ul>
+<li>plugs in small holes and prevents external fragmentation</li>
+<li>is better for very large allocations, since buddy/slab will then cause more external fragmentation</li>
+<li>is slower than slab</li>
+<li>uses non-contiguous physical memory</li>
+<li>has its own range</li>
+</ul>
+</li>
+<li>slab allocator
+<ul>
+<li>is very fast, since it uses a cache</li>
+<li>uses contiguous physical memory</li>
+</ul>
+</li>
+</ul>
 <h3 id="fragmentation"><a class="header" href="#fragmentation">Fragmentation</a></h3>
 <ul>
 <li><strong>External fragmentation</strong> When a request for a large amount of memory comes in, although there might be enough memory for it, it is unable to be allocated due to many disjoint holes of unallocated space.
@@ -225,13 +245,37 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <li><code>kasan</code> - compiler instrumentation, adds combines canary and poison ideas</li>
 </ol>
 </li>
+<li>out of bounds detection only works for off-by-one errors, page-guard vs poison strategy performance difference is non-trivial, but generally page-guards are faster</li>
 </ul>
-<h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
+<h1 id="questions-and-answers"><a class="header" href="#questions-and-answers">Questions and Answers</a></h1>
 <ul>
-<li>Holes in physical memory are either device mapped or reserved - might the BIOS reserve memory regions?</li>
-<li>Why does the kernel have to use virtual memory addresses in the first place can't it just map directly</li>
-<li>Padding added to zone struct caching?</li>
-<li>Why does memblock sort by base address?</li>
+<li>
+<p>Holes in physical memory are either device mapped or reserved, what reserves them?</p>
+<ul>
+<li>BIOS reserves memory as well</li>
+</ul>
+</li>
+<li>
+<p>might the BIOS reserve memory regions? some holes backed by memory. Some should escape memory management logic</p>
+</li>
+<li>
+<p>Why does the kernel have to use virtual memory addresses in the first place can't it just map directly?</p>
+<ul>
+<li>needs to provide memory separation for clients</li>
+</ul>
+</li>
+<li>
+<p>Padding added to zone struct caching?</p>
+<ul>
+<li>Cache sharing issues for multicore processors. Ping Pong effect can happen.</li>
+</ul>
+</li>
+<li>
+<p>Why do we need zones? - tag memory to differentiate for different purposes surface access only software cares about it, but devices might have hardware limitations.</p>
+</li>
+<li>
+<p>Why do we need  pages? - since hardware provided page granularity</p>
+</li>
 </ul>
 
                     </main>
