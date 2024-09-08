@@ -63,7 +63,7 @@ Power of two allocator with free coalescing. During allocation, requested size w
 * out of bounds detection only works for off-by-one errors, page-guard vs poison strategy performance difference is non-trivial, but generally page-guards are faster
 
 
-# Questions and Answers
+# Questions
 * Holes in physical memory are either device mapped or reserved, what reserves them?
     * BIOS reserves memory as well 
  * might the BIOS reserve memory regions? some holes backed by memory. Some should escape memory management logic

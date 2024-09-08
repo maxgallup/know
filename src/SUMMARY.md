@@ -9,8 +9,8 @@
 - [Advanced Operating Systems](advanced-os/index.md)
     - [Booting](advanced-os/booting.md)
     - [Memory](advanced-os/memory.md)
+    - [Page Tables](advanced-os/page-tables.md)
 
-    <!-- - [todo Jon gjengset on software testing with rust](./software-testing/index.md) -->
 
 
 
