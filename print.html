@@ -778,6 +778,56 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 </li>
 <li>XD: execute allowed (0) or disabled (1)</li>
 </ul>
+<h2 id="translation-lookaside-buffer-tlb"><a class="header" href="#translation-lookaside-buffer-tlb">Translation Lookaside Buffer (TLB)</a></h2>
+<ul>
+<li>result of PT translation is a mapping, so we cache the mapping</li>
+<li>Hardware based cache that stores memory addresses</li>
+<li>Temporal and spatial locality</li>
+<li>TLB has very small size, due to implementing LRU</li>
+<li>thus, bad temporal and spatial locality will reduce performance</li>
+<li>Since TLB is a cache of the page tables, it must be flushed when the Page tables are changed (switching to a new address space) and when explicitly flushing</li>
+<li>If TLB not flushed when necessary means disaster</li>
+<li>Translation Caches
+<ul>
+<li>caching PT pages</li>
+<li>OS can use bigger pages -&gt; shorter walk on TLB Miss</li>
+<li>translation cache tagged with part of virt addr
+<ul>
+<li>reduce time it takes for a TLB miss</li>
+<li>managed transparently by hardware</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="security"><a class="header" href="#security">Security</a></h2>
+<ul>
+<li>Use page tables to improve sanity checks leave holes and let CPU raise segmentation fault</li>
+<li>holes in the identity map, just before and after array add guard page</li>
+<li>Pros: no wastage</li>
+<li>Cons: more complex management</li>
+</ul>
+<h3 id="exploits"><a class="header" href="#exploits">Exploits</a></h3>
+<ul>
+<li>kernels are Highly complex concurrent code (~20M lines of  code)</li>
+<li>Physmap in linux is a primary target</li>
+<li>kernel base address is a jump target</li>
+</ul>
+<h3 id="kernel-address-space-layout-randomization-kaslr"><a class="header" href="#kernel-address-space-layout-randomization-kaslr">Kernel Address Space Layout Randomization (KASLR)</a></h3>
+<ul>
+<li>Randomizes sections in kernel address space</li>
+<li>The entire kernel code starts from a random address space
+<ul>
+<li>brute-forcing leads to crashes</li>
+<li>leak kernel pointers, requires second vulnerability</li>
+<li>side-channel attacks, very complex to defend</li>
+</ul>
+</li>
+<li>entropy simplified, remains the same until reboot</li>
+<li>random slot is chosen early during boot, kernel is mapped there</li>
+<li>requires remapping kernel itself as well as its physical memory</li>
+<li>use side channels to leak a kernel address</li>
+</ul>
 <h1 id="questions-2"><a class="header" href="#questions-2">Questions</a></h1>
 <ul>
 <li>What is in the address field of a PTE?
