@@ -79,9 +79,36 @@ OS provides virtual memory addresses to processes. Page tables store the transla
 * Dynamically update page tables for each address space
 * If a process maps/un-maps in memory, it must be added/removed to address space
 * MMU uses updated page tables
-1. find page table entry 
+* find page table entry (assume x86_64, 48bit virt addr, page table mapped into virtual memory)
+1. locate top-level PT (read cr3 register or process struct)
+2. Locate 2nd level PT
+    * get virtual pointer to top-level page
+    * use bits 39-47 of virtual address as index
+    * Is the page table entry present? if no, then abort
+3. Locate 3rd level PT
+    * get virtual pointer to 2nd level page
+    * use bits 30-38 of virtual address as index
+    * is page table entry present? if no, then abort
+4. ...
+5. Last page table entry has physical address of page
 
+## Page Table Mapping
+* Input is Virtual address where mapping will take place, do the page table walk to find locate the page table entry
+* If entry not present at any level, allocate new page, store its physical address in non-present entry, continue with next level
+* Finally store physical address of page to be mapped in final PTE
 
+## Page Table Unmapping
+* Locate PTE from virt addr to be unmapped with page table walk
+* zero out final table entry (Because of Foreshadow attack)
+* Free the page table (optional)
+* free the page
+
+## Permission bits
+* P: page faults (0) or present (1)
+* R/W: read-only (0) or writable (1)
+* U/S: Supervisor-only (0) or user-accessible (1)
+    * SMAP protection: 1 becomes user-only (follow POLP)
+* XD: execute allowed (0) or disabled (1)
 
 
 
