@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -595,7 +595,7 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 </li>
 <li>out of bounds detection only works for off-by-one errors, page-guard vs poison strategy performance difference is non-trivial, but generally page-guards are faster</li>
 </ul>
-<h1 id="questions-and-answers"><a class="header" href="#questions-and-answers">Questions and Answers</a></h1>
+<h1 id="questions-1"><a class="header" href="#questions-1">Questions</a></h1>
 <ul>
 <li>
 <p>Holes in physical memory are either device mapped or reserved, what reserves them?</p>
@@ -623,6 +623,141 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 </li>
 <li>
 <p>Why do we need  pages? - since hardware provided page granularity</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="page-tables"><a class="header" href="#page-tables">Page Tables</a></h1>
+<p>OS provides virtual memory addresses to processes. Page tables store the translation from virtual addresses to physical addresses and OS gets to decide on this mapping. Virtual addresses are the index to a page table entry in the page table where physical addresses of underlying data are stored. A special register <code>cr3</code> contains physical pointer to first page table. Each page defines an address space which is useful for separating memory for separate processes.</p>
+<h3 id="address-spaces"><a class="header" href="#address-spaces">Address spaces</a></h3>
+<ul>
+<li>Virtualize physical memory can be reused every time</li>
+<li>Flexible memory management for continuous memory for example</li>
+<li>Provides isolation and separation for separate processes.
+<ul>
+<li>Shared memory can include same virtual memory for multiple process</li>
+<li>threads use shared memory</li>
+<li>1 process per 1 page table is typical</li>
+<li>Many processes per 1 page table is shared memory</li>
+<li>Dynamically linked libraries are loaded into phys mem once</li>
+</ul>
+</li>
+</ul>
+<h3 id="linear-page-table"><a class="header" href="#linear-page-table">Linear page table</a></h3>
+<ul>
+<li>Simple and old design</li>
+<li>first 4 bits of Virtual address are index to array of physical offsets</li>
+<li>remaining 12 bits are offset within page</li>
+<li>1 bit for whether the memory is present or not</li>
+</ul>
+<h3 id="hierarchical-page-table"><a class="header" href="#hierarchical-page-table">Hierarchical page table</a></h3>
+<ul>
+<li>first 10 bits are index to level 1 page table containing address of 2nd physical page table</li>
+<li>second 10 bits are index to level 2 page table</li>
+<li>remaining 12 bits are offset within page</li>
+</ul>
+<h3 id="inverted-page-tables"><a class="header" href="#inverted-page-tables">Inverted Page tables</a></h3>
+<ul>
+<li>IA64 (itanic)</li>
+<li>using a hash of the virtual memory to store physical address, scales well</li>
+</ul>
+<h3 id="four-level-page-table"><a class="header" href="#four-level-page-table">Four-level Page Table</a></h3>
+<ul>
+<li>cr3 contains pointer to PML4 table which is highest level table</li>
+<li>Highest bytes on intel aren't used by default Memory Tagging possible, set by sign extended</li>
+<li>Virtual address contains:
+<ul>
+<li>First 16 bits are sign extend or MT Tagging</li>
+<li>First 9 bits: PML4 offset</li>
+<li>Second 9 bits: Page Directory-Pointer Offset</li>
+<li>Third 9 bits: Page Directory Offset</li>
+<li>Fourth 9 bits: Page Table Offset</li>
+<li>Last 12 bits: Physical Page Offset</li>
+</ul>
+</li>
+</ul>
+<h2 id="page-table-entries"><a class="header" href="#page-table-entries">Page Table Entries</a></h2>
+<ul>
+<li>64 bits, contain bits for if present, writable, supervisor mode, etc...</li>
+<li>48bit virtual address and physical address space</li>
+<li>Address of large pages:
+<ul>
+<li>first level PTE doesn't support (512GB) pages</li>
+<li>second level PTE supports 1GB Pages</li>
+<li>third level PTE supports 2MB Pages</li>
+<li>4th PTE only 4K Pages</li>
+</ul>
+</li>
+</ul>
+<h2 id="on-boot"><a class="header" href="#on-boot">On Boot</a></h2>
+<ul>
+<li>asm code loads addresses of the 4 levels depending on how much static memory kernel requires</li>
+<li>only static</li>
+</ul>
+<h2 id="post-boot"><a class="header" href="#post-boot">Post Boot</a></h2>
+<ul>
+<li>Dynamic, allows page table mappings to change during runtime</li>
+<li>Map more pages if more memory is needed</li>
+<li>Unmap pages if memory is not needed</li>
+<li>What should virtual address space look like in terms of policies?</li>
+<li>How are they enforced?</li>
+</ul>
+<h2 id="virtual-address-space-of-process-p"><a class="header" href="#virtual-address-space-of-process-p">Virtual address space of process P</a></h2>
+<ul>
+<li>How can we ensure address space of P and P+1 are separate -&gt; page tables</li>
+</ul>
+<h2 id="meltdown"><a class="header" href="#meltdown">Meltdown</a></h2>
+<ul>
+<li>Kernel is mapped into higher regions of address space for P, how to make sure P can't access/modify Kernel data?
+<ul>
+<li>User supervisor bit can be set in PTE, process can't access kernel data despite it being mapped in</li>
+<li>Post 2018 Meltdown was able to read kernel data, kernel no longer mapped in address space
+<ul>
+<li>Kernel now has own page table</li>
+<li>on every syscall or Process switch, page tables must be changed, performance impact</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="foreshadow-attack"><a class="header" href="#foreshadow-attack">Foreshadow Attack</a></h2>
+<ul>
+<li>bypasses the present bit of a PTE, could read pages even if not present</li>
+<li>Now we must clear page frame address when un-mapping</li>
+</ul>
+<h2 id="ridl"><a class="header" href="#ridl">RIDL</a></h2>
+<ul>
+<li>bypass the address bits - able to read other data</li>
+<li>must flush CPU registers to solve</li>
+</ul>
+<h1 id="page-table-walk"><a class="header" href="#page-table-walk">Page Table Walk</a></h1>
+<ul>
+<li>Dynamically update page tables for each address space</li>
+<li>If a process maps/un-maps in memory, it must be added/removed to address space</li>
+<li>MMU uses updated page tables</li>
+</ul>
+<ol>
+<li>find page table entry</li>
+</ol>
+<h1 id="questions-2"><a class="header" href="#questions-2">Questions</a></h1>
+<ul>
+<li>What is in the address field of a PTE?
+<ul>
+<li>there is a fraction of a physical address along with the page table offset</li>
+</ul>
+</li>
+<li>How much memory can be mapped in x86_64?
+<ul>
+<li>48 bits to store physical address = 2^40 * 2^8 = 256 Tb</li>
+</ul>
+</li>
+<li>How much memory does a Page in the Page table map?
+<ul>
+<li>depends whether it is used for large pages, huge or normal pages, but each PTP is 4KB and each PTE is 8 bytes 4096/8 = 512 or 2^12 / 2^3 = 2^9</li>
+</ul>
+</li>
+<li>How to find page table pages?
+<ul>
+<li>Go through levels of page tables to find entry we want to change.</li>
+</ul>
 </li>
 </ul>
 
