@@ -281,10 +281,51 @@
 <li>Dynamically update page tables for each address space</li>
 <li>If a process maps/un-maps in memory, it must be added/removed to address space</li>
 <li>MMU uses updated page tables</li>
+<li>find page table entry (assume x86_64, 48bit virt addr, page table mapped into virtual memory)</li>
 </ul>
 <ol>
-<li>find page table entry</li>
+<li>locate top-level PT (read cr3 register or process struct)</li>
+<li>Locate 2nd level PT
+<ul>
+<li>get virtual pointer to top-level page</li>
+<li>use bits 39-47 of virtual address as index</li>
+<li>Is the page table entry present? if no, then abort</li>
+</ul>
+</li>
+<li>Locate 3rd level PT
+<ul>
+<li>get virtual pointer to 2nd level page</li>
+<li>use bits 30-38 of virtual address as index</li>
+<li>is page table entry present? if no, then abort</li>
+</ul>
+</li>
+<li>...</li>
+<li>Last page table entry has physical address of page</li>
 </ol>
+<h2 id="page-table-mapping"><a class="header" href="#page-table-mapping">Page Table Mapping</a></h2>
+<ul>
+<li>Input is Virtual address where mapping will take place, do the page table walk to find locate the page table entry</li>
+<li>If entry not present at any level, allocate new page, store its physical address in non-present entry, continue with next level</li>
+<li>Finally store physical address of page to be mapped in final PTE</li>
+</ul>
+<h2 id="page-table-unmapping"><a class="header" href="#page-table-unmapping">Page Table Unmapping</a></h2>
+<ul>
+<li>Locate PTE from virt addr to be unmapped with page table walk</li>
+<li>zero out final table entry (Because of Foreshadow attack)</li>
+<li>Free the page table (optional)</li>
+<li>free the page</li>
+</ul>
+<h2 id="permission-bits"><a class="header" href="#permission-bits">Permission bits</a></h2>
+<ul>
+<li>P: page faults (0) or present (1)</li>
+<li>R/W: read-only (0) or writable (1)</li>
+<li>U/S: Supervisor-only (0) or user-accessible (1)
+<ul>
+<li>SMAP protection: 1 becomes user-only (follow POLP)</li>
+</ul>
+</li>
+<li>XD: execute allowed (0) or disabled (1)</li>
+</ul>
 <h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
 <ul>
 <li>What is in the address field of a PTE?
