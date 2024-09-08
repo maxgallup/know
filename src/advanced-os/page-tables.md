@@ -110,7 +110,42 @@ OS provides virtual memory addresses to processes. Page tables store the transla
     * SMAP protection: 1 becomes user-only (follow POLP)
 * XD: execute allowed (0) or disabled (1)
 
+## Translation Lookaside Buffer (TLB)
+* result of PT translation is a mapping, so we cache the mapping
+* Hardware based cache that stores memory addresses
+* Temporal and spatial locality
+* TLB has very small size, due to implementing LRU
+* thus, bad temporal and spatial locality will reduce performance
+* Since TLB is a cache of the page tables, it must be flushed when the Page tables are changed (switching to a new address space) and when explicitly flushing
+* If TLB not flushed when necessary means disaster
+* Translation Caches
+    * caching PT pages
+    * OS can use bigger pages -> shorter walk on TLB Miss
+    * translation cache tagged with part of virt addr
+        * reduce time it takes for a TLB miss
+        * managed transparently by hardware
 
+## Security
+* Use page tables to improve sanity checks leave holes and let CPU raise segmentation fault
+* holes in the identity map, just before and after array add guard page
+* Pros: no wastage
+* Cons: more complex management
+
+### Exploits
+* kernels are Highly complex concurrent code (~20M lines of  code)
+* Physmap in linux is a primary target
+* kernel base address is a jump target
+
+### Kernel Address Space Layout Randomization (KASLR)
+* Randomizes sections in kernel address space
+* The entire kernel code starts from a random address space
+    * brute-forcing leads to crashes
+    * leak kernel pointers, requires second vulnerability
+    * side-channel attacks, very complex to defend
+* entropy simplified, remains the same until reboot
+* random slot is chosen early during boot, kernel is mapped there
+* requires remapping kernel itself as well as its physical memory
+* use side channels to leak a kernel address
 
 # Questions
 * What is in the address field of a PTE?
