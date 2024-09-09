@@ -42,7 +42,8 @@ Any OS will make sure that sys resources can be multiplexed by competing applica
 
 * Defending Kernel Attacks: prevent kernel vulnerabilities from directing control flow to user land code by enabling SMAP Supervisor Mode Access Protection
 * ASLR: user process randomization
-    * linux mmap provides 28 buts if entropy
+    * linux mmap provides 28 bits of entropy
+
 
 
 

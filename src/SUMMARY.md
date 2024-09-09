@@ -10,6 +10,8 @@
     - [Booting](advanced-os/booting.md)
     - [Memory](advanced-os/memory.md)
     - [Page Tables](advanced-os/page-tables.md)
+    - [User Mode](advanced-os/user-mode.md)
+    - [Interrupts](advanced-os/interrupts.md)
 
 
 
