@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Page not found - Knowledge Base</title>
-        <base href="/">
+        <title>Interrupts - Knowledge Base</title>
 
 
         <!-- Custom HTML head -->
@@ -13,21 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -36,7 +35,7 @@
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -89,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../advanced-os/interrupts.html" class="active"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -145,7 +144,7 @@
                     <h1 class="menu-title">Knowledge Base</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -174,13 +173,95 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1 id="interrupts"><a class="header" href="#interrupts">Interrupts</a></h1>
+<p>An event that interrupts the execution flow of the kernel. It gets handled by the kernel before the program execution can continue. From the perspective of the CPU they can either be <em>external</em> - (key presses, network packets) or <em>internal</em> - (divide by zero, page fault).</p>
+<h3 id="terminology-intel-based"><a class="header" href="#terminology-intel-based">Terminology (Intel based)</a></h3>
+<ul>
+<li>
+<p>Interrupt (something needs handling)</p>
+<ul>
+<li>External:
+<ul>
+<li>Hardware generated, a device triggers the interrupt through a pin on the CPU, masking allows to postpone consecutive interrupts (only kernel can set masks)</li>
+<li>Software generated, software needs something form kernel - opening a file, allocating memory, any system call (<code>int n</code> defines the type of interrupt where n is 1 byte)</li>
+</ul>
+</li>
+<li>Internal - <em>see question 1</em></li>
+</ul>
+</li>
+<li>
+<p>Exception (something went wrong)</p>
+<ul>
+<li>Fault - error condition (/0, page fault...) instruction can be retried</li>
+<li>Trap - Typically for debugging (breakpoint, overflow) program can resume</li>
+<li>Abort - serious error condition that is unrecoverable, process cannot continue (double fault or unrecoverable hardware error)</li>
+</ul>
+</li>
+<li>
+<p>Asynchronous vs Synchronous interrupts</p>
+<ul>
+<li>most software interrupts are synchronous - kernel can handle specific to the instruction</li>
+<li>most hardware interrupts are asynchronous - can come at any time, masking must be done</li>
+</ul>
+</li>
+</ul>
+<h3 id="privilege"><a class="header" href="#privilege">Privilege</a></h3>
+<ul>
+<li>Interrupt handlers run at high privilege level, but are handled in ring 0</li>
+</ul>
+<h3 id="interrupt-procedure"><a class="header" href="#interrupt-procedure">Interrupt Procedure</a></h3>
+<ol>
+<li>CPU elevates privilege level and switches to kernel stack</li>
+<li>some user context is saved so that program can resume again</li>
+<li>The interrupt's service routine is called</li>
+<li>CPU restores some of the user context and drops the privilege level</li>
+</ol>
+<h3 id="idt-interrupt-descriptor-table"><a class="header" href="#idt-interrupt-descriptor-table">IDT Interrupt Descriptor Table</a></h3>
+<ul>
+<li>Max 256 entries</li>
+<li>first 32 entries reserved exceptions</li>
+<li>16 external hardware interrupts can be remapped using APIC unit</li>
+<li>IDTR (R for register) contains IDT Base Address + IDT Limit</li>
+</ul>
+<h3 id="trap-vs-interrupt"><a class="header" href="#trap-vs-interrupt">Trap vs Interrupt</a></h3>
+<ul>
+<li>Interrupt will mask further interrupts</li>
+<li>Trap (exception) will not mask</li>
+</ul>
+<h3 id="restoring-the-kernel-stack"><a class="header" href="#restoring-the-kernel-stack">Restoring the Kernel stack</a></h3>
+<ul>
+<li>TSS Task State Segment</li>
+<li>TR Task Register</li>
+<li>TSS contains stack pointers for each ring</li>
+</ul>
+<h3 id="returning"><a class="header" href="#returning">Returning</a></h3>
+<ul>
+<li>special <code>iret</code> returns all the state for the user process and makes sure the CS is set back to the right privilege</li>
+</ul>
+<h3 id="livelocks"><a class="header" href="#livelocks">Livelocks</a></h3>
+<ul>
+<li>Too many interrupts will cause the CPU to deal with nothing else.</li>
+<li>should try do as little in the handling routine as possible</li>
+<li>reduce number of interrupts</li>
+<li>offload to hardware</li>
+<li>switch to polling vs handling</li>
+<li>hardware DMA, forego interrupts</li>
+</ul>
+<h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
+<ul>
+<li>Are software interrupts considered strictly internal interrupts?</li>
+<li>Where in memory is IDT?</li>
+<li>Who sets IDTR?</li>
+<li>Where is interrupt code in memory?</li>
+</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../advanced-os/user-mode.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
 
                         <div style="clear: both"></div>
@@ -189,6 +270,9 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../advanced-os/user-mode.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
             </nav>
 
@@ -202,13 +286,13 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 
