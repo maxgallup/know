@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="advanced-os/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1018,6 +1018,15 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <li>Who sets IDTR?</li>
 <li>Where is interrupt code in memory?</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="system-calls"><a class="header" href="#system-calls">System Calls</a></h1>
+<p>Interrupts raised by software, a demand by a process requesting the kernel to do something.
+Originally, it was just <code>int 0x80</code>, nowadays there are more optimized <code>syscall</code> instructions. User and Kernel code abide by calling convention to put the syscall number into %rax, and arguments are specified into specific registers (<code>rdi, %rsi, %rdx, %r10, %r8, %r9</code>). Kernel places return value into <code>%rax</code>.</p>
+<h3 id="performance-of-syscalls"><a class="header" href="#performance-of-syscalls">Performance of Syscalls</a></h3>
+<ul>
+<li>IDT entry cached in CPU register to avoid cache misses.</li>
+</ul>
+<h1 id="questions-5"><a class="header" href="#questions-5">Questions</a></h1>
+<p>Why exactly is there a pipeline performance issue?</p>
 
                     </main>
 
