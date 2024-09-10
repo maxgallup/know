@@ -12,6 +12,7 @@
     - [Page Tables](advanced-os/page-tables.md)
     - [User Mode](advanced-os/user-mode.md)
     - [Interrupts](advanced-os/interrupts.md)
+    - [System Calls](advanced-os/system-calls.md)
 
 
 
