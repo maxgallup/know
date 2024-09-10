@@ -92,6 +92,10 @@ OS provides virtual memory addresses to processes. Page tables store the transla
 4. ...
 5. Last page table entry has physical address of page
 
+### Instructions to perform the walk TODO
+1. take 9 bits of virt addr, multiply by 8 to get offset and concatenate to bottom 12 bits of cr3.pml4
+1. repeat 
+
 ## Page Table Mapping
 * Input is Virtual address where mapping will take place, do the page table walk to find locate the page table entry
 * If entry not present at any level, allocate new page, store its physical address in non-present entry, continue with next level
@@ -156,5 +160,9 @@ OS provides virtual memory addresses to processes. Page tables store the transla
     * depends whether it is used for large pages, huge or normal pages, but each PTP is 4KB and each PTE is 8 bytes 4096/8 = 512 or 2^12 / 2^3 = 2^9
 * How to find page table pages?
     * Go through levels of page tables to find entry we want to change.
+
+
+
+
 
 
