@@ -177,28 +177,37 @@
 <p>Any OS will make sure that sys resources can be multiplexed by competing applications. Should happen safely and efficiently. CPU provides support for privileged instructions</p>
 <h3 id="privilege-separation"><a class="header" href="#privilege-separation">Privilege Separation</a></h3>
 <ul>
-<li>x86 has 4 rings of privilege
+<li>
+<p>x86 has 4 rings of privilege</p>
 <ul>
 <li>ring 0: runs kernel, most privileges</li>
 <li>ring 1,2: unused</li>
 <li>ring 3: user code</li>
 </ul>
 </li>
-<li>Pointers can be associated either with:
+<li>
+<p>Pointers can be associated either with:</p>
 <ul>
 <li>Code segments (CS)</li>
 <li>Data segments (DS) - heap pointer</li>
 <li>Stack Segment (SS) - Local variable pointer</li>
 </ul>
 </li>
-<li>CS:0x1000 can be different than DS:0x1000</li>
-<li>However, today all segments point to same memory</li>
-<li>low-order 2 bits of CS register determine current ring</li>
-<li>No instruction sets CS register directly
+<li>
+<p>CS:0x1000 can be different than DS:0x1000</p>
+</li>
+<li>
+<p>However, today all segments point to same memory</p>
+</li>
+<li>
+<p>low-order 2 bits of CS register determine current ring</p>
+</li>
+<li>
+<p>No instruction sets CS register directly</p>
 <ul>
 <li>From user -&gt; Kernel
 <ul>
-<li>interrupt CPU ("int" instruction)</li>
+<li>interrupt CPU ("int" instruction) actually sets CS to 0x00</li>
 <li>CPU switches to interrupt handler in kernel (from interrupt table containing functions)</li>
 </ul>
 </li>
@@ -210,15 +219,20 @@
 </li>
 </ul>
 </li>
+<li>
+<p>segments are registers which makes them selectors from a table (GDT)</p>
+</li>
 </ul>
 <h4 id="global-descriptor-table"><a class="header" href="#global-descriptor-table">Global Descriptor Table</a></h4>
 <ul>
+<li>contains information on segments, code segment selector is an offset into GDT</li>
 <li>specifies all the segments and different rings</li>
 <li>GDTR register points to the GDT</li>
 <li>DPL Field decides which ring can access memory</li>
 </ul>
-<h1 id="task-struct-linux"><a class="header" href="#task-struct-linux">Task struct (linux')</a></h1>
+<h1 id="task-struct-linux"><a class="header" href="#task-struct-linux">Task struct (linux)</a></h1>
 <ul>
+<li>Task is a generalization of a process and a thread</li>
 <li>contains pid, parent_pid, frame of registers and pointer to page_table</li>
 <li>contains a specific state, stack pointer, which cpu, memory management, credentials, open files that process can access</li>
 </ul>
@@ -242,6 +256,8 @@
 <ul>
 <li>bypasses the address bits</li>
 <li>ver instruction flushes address</li>
+<li>SMEP - supervisor mode execution protection (always on)</li>
+<li>SMAP - supervisor mode access protection (copy_to / from_user) - specific instructions exist to temporarily disable SMAP</li>
 </ul>
 </li>
 <li>
@@ -256,8 +272,11 @@
 </ul>
 <h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
 <ul>
+<li>Where does it store user mode state?</li>
 <li>Where is GDT stored and who is responsible for it?</li>
-<li>What is the minimum of kernel code needed to map into a process? interrupt handler and sys calls</li>
+<li>What is the minimum of kernel code needed to map into a process? interrupt handler and sys calls, kernel stack, trampoline to kernel.</li>
+<li>How can processes have different privilege levels? - Task structs can add another level of privileges between user processes.</li>
+<li>If user code is no-pie, you can still always randomize the stack and heap.</li>
 </ul>
 
                     </main>

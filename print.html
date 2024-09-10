@@ -754,6 +754,11 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <li>...</li>
 <li>Last page table entry has physical address of page</li>
 </ol>
+<h3 id="instructions-to-perform-the-walk-todo"><a class="header" href="#instructions-to-perform-the-walk-todo">Instructions to perform the walk TODO</a></h3>
+<ol>
+<li>take 9 bits of virt addr, multiply by 8 to get offset and concatenate to bottom 12 bits of cr3.pml4</li>
+<li>repeat</li>
+</ol>
 <h2 id="page-table-mapping"><a class="header" href="#page-table-mapping">Page Table Mapping</a></h2>
 <ul>
 <li>Input is Virtual address where mapping will take place, do the page table walk to find locate the page table entry</li>
@@ -855,28 +860,37 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <p>Any OS will make sure that sys resources can be multiplexed by competing applications. Should happen safely and efficiently. CPU provides support for privileged instructions</p>
 <h3 id="privilege-separation"><a class="header" href="#privilege-separation">Privilege Separation</a></h3>
 <ul>
-<li>x86 has 4 rings of privilege
+<li>
+<p>x86 has 4 rings of privilege</p>
 <ul>
 <li>ring 0: runs kernel, most privileges</li>
 <li>ring 1,2: unused</li>
 <li>ring 3: user code</li>
 </ul>
 </li>
-<li>Pointers can be associated either with:
+<li>
+<p>Pointers can be associated either with:</p>
 <ul>
 <li>Code segments (CS)</li>
 <li>Data segments (DS) - heap pointer</li>
 <li>Stack Segment (SS) - Local variable pointer</li>
 </ul>
 </li>
-<li>CS:0x1000 can be different than DS:0x1000</li>
-<li>However, today all segments point to same memory</li>
-<li>low-order 2 bits of CS register determine current ring</li>
-<li>No instruction sets CS register directly
+<li>
+<p>CS:0x1000 can be different than DS:0x1000</p>
+</li>
+<li>
+<p>However, today all segments point to same memory</p>
+</li>
+<li>
+<p>low-order 2 bits of CS register determine current ring</p>
+</li>
+<li>
+<p>No instruction sets CS register directly</p>
 <ul>
 <li>From user -&gt; Kernel
 <ul>
-<li>interrupt CPU ("int" instruction)</li>
+<li>interrupt CPU ("int" instruction) actually sets CS to 0x00</li>
 <li>CPU switches to interrupt handler in kernel (from interrupt table containing functions)</li>
 </ul>
 </li>
@@ -888,15 +902,20 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 </li>
 </ul>
 </li>
+<li>
+<p>segments are registers which makes them selectors from a table (GDT)</p>
+</li>
 </ul>
 <h4 id="global-descriptor-table"><a class="header" href="#global-descriptor-table">Global Descriptor Table</a></h4>
 <ul>
+<li>contains information on segments, code segment selector is an offset into GDT</li>
 <li>specifies all the segments and different rings</li>
 <li>GDTR register points to the GDT</li>
 <li>DPL Field decides which ring can access memory</li>
 </ul>
-<h1 id="task-struct-linux"><a class="header" href="#task-struct-linux">Task struct (linux')</a></h1>
+<h1 id="task-struct-linux"><a class="header" href="#task-struct-linux">Task struct (linux)</a></h1>
 <ul>
+<li>Task is a generalization of a process and a thread</li>
 <li>contains pid, parent_pid, frame of registers and pointer to page_table</li>
 <li>contains a specific state, stack pointer, which cpu, memory management, credentials, open files that process can access</li>
 </ul>
@@ -920,6 +939,8 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <ul>
 <li>bypasses the address bits</li>
 <li>ver instruction flushes address</li>
+<li>SMEP - supervisor mode execution protection (always on)</li>
+<li>SMAP - supervisor mode access protection (copy_to / from_user) - specific instructions exist to temporarily disable SMAP</li>
 </ul>
 </li>
 <li>
@@ -934,8 +955,11 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 </ul>
 <h1 id="questions-3"><a class="header" href="#questions-3">Questions</a></h1>
 <ul>
+<li>Where does it store user mode state?</li>
 <li>Where is GDT stored and who is responsible for it?</li>
-<li>What is the minimum of kernel code needed to map into a process? interrupt handler and sys calls</li>
+<li>What is the minimum of kernel code needed to map into a process? interrupt handler and sys calls, kernel stack, trampoline to kernel.</li>
+<li>How can processes have different privilege levels? - Task structs can add another level of privileges between user processes.</li>
+<li>If user code is no-pie, you can still always randomize the stack and heap.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="interrupts"><a class="header" href="#interrupts">Interrupts</a></h1>
 <p>An event that interrupts the execution flow of the kernel. It gets handled by the kernel before the program execution can continue. From the perspective of the CPU they can either be <em>external</em> - (key presses, network packets) or <em>internal</em> - (divide by zero, page fault).</p>
@@ -947,10 +971,9 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <li>External:
 <ul>
 <li>Hardware generated, a device triggers the interrupt through a pin on the CPU, masking allows to postpone consecutive interrupts (only kernel can set masks)</li>
-<li>Software generated, software needs something form kernel - opening a file, allocating memory, any system call (<code>int n</code> defines the type of interrupt where n is 1 byte)</li>
 </ul>
 </li>
-<li>Internal - <em>see question 1</em></li>
+<li>Internal - Software generated, software needs something form kernel - opening a file, allocating memory, any system call (<code>int n</code> defines the type of interrupt where n is 1 byte)</li>
 </ul>
 </li>
 <li>
@@ -960,6 +983,9 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <li>Trap - Typically for debugging (breakpoint, overflow) program can resume</li>
 <li>Abort - serious error condition that is unrecoverable, process cannot continue (double fault or unrecoverable hardware error)</li>
 </ul>
+</li>
+<li>
+<p>Interrupt handling systems handles exceptions as well</p>
 </li>
 <li>
 <p>Asynchronous vs Synchronous interrupts</p>
@@ -975,8 +1001,8 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 </ul>
 <h3 id="interrupt-procedure"><a class="header" href="#interrupt-procedure">Interrupt Procedure</a></h3>
 <ol>
-<li>CPU elevates privilege level and switches to kernel stack</li>
-<li>some user context is saved so that program can resume again</li>
+<li>CPU elevates privilege level and switches to kernel stack (unless already in kernel)</li>
+<li>User context is saved so that program can resume again</li>
 <li>The interrupt's service routine is called</li>
 <li>CPU restores some of the user context and drops the privilege level</li>
 </ol>
@@ -986,6 +1012,12 @@ De-allocation: scans reserved list, split up regions if necessary</p>
 <li>first 32 entries reserved exceptions</li>
 <li>16 external hardware interrupts can be remapped using APIC unit</li>
 <li>IDTR (R for register) contains IDT Base Address + IDT Limit</li>
+<li>Interrupt vector identifies type of interrupt</li>
+<li>look up interrupt gate in IDT using vector</li>
+<li>Jump to interrupt handler and ring 0</li>
+<li>Mask further instr</li>
+<li>Switch stack</li>
+<li>Store calling context</li>
 </ul>
 <h3 id="trap-vs-interrupt"><a class="header" href="#trap-vs-interrupt">Trap vs Interrupt</a></h3>
 <ul>

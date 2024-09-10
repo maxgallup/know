@@ -302,6 +302,11 @@
 <li>...</li>
 <li>Last page table entry has physical address of page</li>
 </ol>
+<h3 id="instructions-to-perform-the-walk-todo"><a class="header" href="#instructions-to-perform-the-walk-todo">Instructions to perform the walk TODO</a></h3>
+<ol>
+<li>take 9 bits of virt addr, multiply by 8 to get offset and concatenate to bottom 12 bits of cr3.pml4</li>
+<li>repeat</li>
+</ol>
 <h2 id="page-table-mapping"><a class="header" href="#page-table-mapping">Page Table Mapping</a></h2>
 <ul>
 <li>Input is Virtual address where mapping will take place, do the page table walk to find locate the page table entry</li>
