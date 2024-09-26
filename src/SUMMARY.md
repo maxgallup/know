@@ -13,6 +13,7 @@
     - [User Mode](advanced-os/user-mode.md)
     - [Interrupts](advanced-os/interrupts.md)
     - [System Calls](advanced-os/system-calls.md)
+    - [Paging](advanced-os/paging.md)
 
 
 

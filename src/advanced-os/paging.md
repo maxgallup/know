@@ -53,7 +53,7 @@ A special kind of exception from interrupt vector 14 where the MMU is indicating
 * Splitting VMAs if they have the same properties 
 
 ## Virtual Memory Area (VMA)
-Contiguous regions of virtual memory with given properties.
+Contiguous regions of virtual memory with given properties. Typically, for on demand paging, only vmas are allocated to a given process, but underlying pages for that memory are not mapped. Only upon a Pagefault of a given requested address will the page be allocated. 
 
 
 
