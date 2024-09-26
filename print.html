@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="advanced-os/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="advanced-os/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="advanced-os/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1059,6 +1059,103 @@ Originally, it was just <code>int 0x80</code>, nowadays there are more optimized
 </ul>
 <h1 id="questions-5"><a class="header" href="#questions-5">Questions</a></h1>
 <p>Why exactly is there a pipeline performance issue?</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="page-faults"><a class="header" href="#page-faults">Page Faults</a></h2>
+<p>A special kind of exception from interrupt vector 14 where the MMU is indicating it wants attention of the OS. On demand paging relies on page faults.</p>
+<ul>
+<li><strong>Invalid</strong> - Access to an invalid page (write to a read only page)</li>
+<li><strong>Major</strong> - Access is valid, but page is no in memory usually takes a longer amount of time to resolve(file or swapped pages)</li>
+<li><strong>Minor</strong> - Access is valid and page is in memory, latency usually small (first access to anonymous memory)</li>
+</ul>
+<h3 id="terms"><a class="header" href="#terms">Terms</a></h3>
+<ul>
+<li>Anonymous Memory - Memory that is not backed by files on the disk such as stack &amp; heap</li>
+<li>File backed Memory - Code pages loaded from disk</li>
+<li>Faulting address - the address that caused the page fault</li>
+</ul>
+<h3 id="kernel-page-faults"><a class="header" href="#kernel-page-faults">Kernel Page faults</a></h3>
+<ul>
+<li>
+<p>Invalid</p>
+<ul>
+<li>faulting address is Kernel address: oops! kernel bug cause panic</li>
+<li>faulting address is User address: checks (linux's copy_to / from_user)</li>
+</ul>
+</li>
+<li>
+<p>Major faults - if kernel is paged out (doesn't happen since linux is always mapped out)</p>
+<ul>
+<li>downsides - very complex, can be dangerous</li>
+<li>upsides - for memory hungry OSes, windows kernel development is run by marketing team and budget vs linux kernel dev is bottom up - reduce complexity vs increasing complexity</li>
+</ul>
+</li>
+<li>
+<p>Minor faults - lazy allocations (not anymore)</p>
+</li>
+</ul>
+<blockquote>
+<p>Aside - huge pages were pushed heavily by cloud companies top down into linux kernel vs in windows top down is the common case</p>
+</blockquote>
+<h3 id="user-page-fault"><a class="header" href="#user-page-fault">User Page fault</a></h3>
+<ul>
+<li>for the user, anything goes!</li>
+<li>faulting address space in mm struct</li>
+<li>How to figure out what went wrong?</li>
+<li>cr2 register contains faulting address</li>
+</ul>
+<h3 id="fault-info---how-to-retrieve-information"><a class="header" href="#fault-info---how-to-retrieve-information">Fault info - how to retrieve information</a></h3>
+<ul>
+<li>
+<p>HW - SW contract, faulting address must be in CR2 register, pushes a 32bit code on the stack for error code encoding</p>
+</li>
+<li>
+<p>| I | R | U | W | P |</p>
+</li>
+<li>
+<p>P - set if pte was present</p>
+</li>
+<li>
+<p>W - set if page cased by write access</p>
+</li>
+<li>
+<p>U - were in User mode</p>
+</li>
+<li>
+<p>R - had reserved bits set (more advanced)</p>
+</li>
+<li>
+<p>I - was an instruction fetch access</p>
+</li>
+<li>
+<p>Get user thread that "holding thread" that made the access <code>get_current().task</code></p>
+</li>
+<li>
+<p>How to implement get_current()</p>
+</li>
+<li>
+<p>on X86 reads from per CPU pointer <code>DECLARE_PER_CPU</code> form gs segment keep one segment in memory around, they are all one to one. Then, gs must point to the right memory for the task</p>
+</li>
+</ul>
+<blockquote>
+<p>kernel mappings must get duplicated in on the memory mapping for every task, typically only over the 256 pml4 entries that matter</p>
+</blockquote>
+<blockquote>
+<p>If we need thread local space (tls) we need a register, can't be pinned to memory</p>
+</blockquote>
+<h3 id="page-faults-1"><a class="header" href="#page-faults-1">Page Faults</a></h3>
+<ul>
+<li>
+<p>VMA info - don't store page table information in vma_area_struct to get faulting address walk page tables to get faulting address</p>
+</li>
+<li>
+<p>Splitting VMAs if they have the same properties</p>
+</li>
+</ul>
+<h2 id="virtual-memory-area-vma"><a class="header" href="#virtual-memory-area-vma">Virtual Memory Area (VMA)</a></h2>
+<p>Contiguous regions of virtual memory with given properties. Typically, for on demand paging, only vmas are allocated to a given process, but underlying pages for that memory are not mapped. Only upon a Pagefault of a given requested address will the page be allocated.</p>
+<h2 id="questions-6"><a class="header" href="#questions-6">Questions</a></h2>
+<ul>
+<li>what does it mean to be anonymous vs file backed?</li>
+</ul>
 
                     </main>
 
