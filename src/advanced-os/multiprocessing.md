@@ -123,6 +123,9 @@ schedule(); // invoke the scheduler
     * System V original UNIX implementation +compatibility
     * POSIX was standardized later +user-friendly +features
 
+* mmap MAP_SHARED only works for processes within the same hierarchy
+* mmap MAP_SHARED could be used for processes outside of the hierarchy if they are file backed (not ideal)
+
 ### Shared Memory (SysV)
 * irrelevant which processes are using shared memory, don't have to be part of same process hierarchy
 * all processes should share them same page frames
@@ -130,6 +133,7 @@ schedule(); // invoke the scheduler
 * attach / detach segment shmid
 
 ### Message Queues (SysV)
+* Also provide 1. data exchange and 2. synchronized exchange (works on top of shared mem)
 * Wants to reliably send message to another process
 * Sending task will copy message to message queue's memory area
 * Receiving task will copy message from queue into its own memory area
@@ -145,6 +149,8 @@ schedule(); // invoke the scheduler
 
 
 # tmpfs
+* shared memory was made available through the different backings (Sys V, mmap(MAP_SHARED), POSIX)
+* 
 
  
 # Questions

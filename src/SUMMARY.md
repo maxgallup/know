@@ -14,6 +14,8 @@
     - [Interrupts](advanced-os/interrupts.md)
     - [System Calls](advanced-os/system-calls.md)
     - [Paging](advanced-os/paging.md)
+    - [Multi-Processing](advanced-os/multiprocessing.md)
+    - [Multi-Core](advanced-os/multicore.md)
 
 
 
