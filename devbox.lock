@@ -1,0 +1,185 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "just@latest": {
+      "last_modified": "2024-10-08T08:54:18Z",
+      "resolved": "github:NixOS/nixpkgs/a2eacc0c62c0537bd1a7a60c1f91d1f3a59fd013#just",
+      "source": "devbox-search",
+      "version": "1.36.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/c30ap38bczk7gnjkp311h04b7fdhb1bp-just-1.36.0",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/hwprbmw8xc76bdy27gd7sdm4mz3qzwym-just-1.36.0-man",
+              "default": true
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/rwpyqrhq5mq6y37bndf47k6p81qmlynh-just-1.36.0-doc"
+            }
+          ],
+          "store_path": "/nix/store/c30ap38bczk7gnjkp311h04b7fdhb1bp-just-1.36.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/d4l0k69vmqbywayfpnnyymc7nxhz05dm-just-1.36.0",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/jm300rvgz9idglacg6prcsx4ly5zghbv-just-1.36.0-man",
+              "default": true
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/8ivar1yv1pwqxhpla2g4vn42441z9q78-just-1.36.0-doc"
+            }
+          ],
+          "store_path": "/nix/store/d4l0k69vmqbywayfpnnyymc7nxhz05dm-just-1.36.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0px5vvvmxf6xw611r5jhdbr5l3ildphz-just-1.36.0",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/dzvh7qi8m4ykk74nms59kvgmz1iypb5l-just-1.36.0-man",
+              "default": true
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/fyl3k7889ihkv3i4bb1yy7dr6pdybijw-just-1.36.0-doc"
+            }
+          ],
+          "store_path": "/nix/store/0px5vvvmxf6xw611r5jhdbr5l3ildphz-just-1.36.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/vghnp6gbqb0iwhm2b42mjm3fwk5cfm5w-just-1.36.0",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/im6kpskb43in5f7qmj0s5w7ag59ix4ai-just-1.36.0-man",
+              "default": true
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/c248vfj5lwvd819bki7l1wh6rfbwbrmy-just-1.36.0-doc"
+            }
+          ],
+          "store_path": "/nix/store/vghnp6gbqb0iwhm2b42mjm3fwk5cfm5w-just-1.36.0"
+        }
+      }
+    },
+    "mdbook@latest": {
+      "last_modified": "2024-09-10T15:01:03Z",
+      "resolved": "github:NixOS/nixpkgs/5ed627539ac84809c78b2dd6d26a5cebeb5ae269#mdbook",
+      "source": "devbox-search",
+      "version": "0.4.40",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/gwgpadx4b2rnnj2zq2c72abgr2i00dkg-mdbook-0.4.40",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/gwgpadx4b2rnnj2zq2c72abgr2i00dkg-mdbook-0.4.40"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/rj6w2fxcz3962h6dfaxfnivsgr6sd4m5-mdbook-0.4.40",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/rj6w2fxcz3962h6dfaxfnivsgr6sd4m5-mdbook-0.4.40"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qy9kp8f2hy03hlsn2c830r7vhdx9lba4-mdbook-0.4.40",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qy9kp8f2hy03hlsn2c830r7vhdx9lba4-mdbook-0.4.40"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/kf6w5gcp13nl0k6q7ymp0p5mycmxpk1i-mdbook-0.4.40",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/kf6w5gcp13nl0k6q7ymp0p5mycmxpk1i-mdbook-0.4.40"
+        }
+      }
+    },
+    "zola@latest": {
+      "last_modified": "2024-09-10T15:01:03Z",
+      "resolved": "github:NixOS/nixpkgs/5ed627539ac84809c78b2dd6d26a5cebeb5ae269#zola",
+      "source": "devbox-search",
+      "version": "0.19.2",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/g0cgi12irmmqmh1wbnaxkf6a2xjvn2dy-zola-0.19.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/g0cgi12irmmqmh1wbnaxkf6a2xjvn2dy-zola-0.19.2"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/g9zm3p41hj9s77f256b1kpbsh0w368rm-zola-0.19.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/g9zm3p41hj9s77f256b1kpbsh0w368rm-zola-0.19.2"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/a88n5rrans50gf622qa2gqmn74xxn4w3-zola-0.19.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/a88n5rrans50gf622qa2gqmn74xxn4w3-zola-0.19.2"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/3wbccnlpwvprk4jnhby3n2gbjcpqb2vh-zola-0.19.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/3wbccnlpwvprk4jnhby3n2gbjcpqb2vh-zola-0.19.2"
+        }
+      }
+    }
+  }
+}
