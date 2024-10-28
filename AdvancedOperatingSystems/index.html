@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Multi-Core - Knowledge Base</title>
+        <title>Advanced Operating Systems - Knowledge Base</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="../advanced-os/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../advanced-os/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="../advanced-os/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="../advanced-os/multicore.html" class="active"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SoftwareTesting/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/index.html" class="active"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li><li class="chapter-item expanded "><a href="../HardwareSecurity/index.html"><strong aria-hidden="true">4.</strong> Hardware Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../HardwareSecurity/dram.html"><strong aria-hidden="true">4.1.</strong> DRAM</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,216 +173,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="multicore"><a class="header" href="#multicore">Multicore</a></h1>
-<ul>
-<li>Dennard's Scaling - <code>P = NCFV^2 + VL</code></li>
-<li>Power decides what you can do in your chip</li>
-<li>Moore's law would lower the size of C, so you could increase the frequency or have more transistors</li>
-<li>Post-Dennard Era (2005-Now)</li>
-<li>Do not increase frequency</li>
-<li>More hardware features - GPU/NIC/FPGA</li>
-<li>Instruction set extensions</li>
-</ul>
-<h3 id="multicores"><a class="header" href="#multicores">Multicores</a></h3>
-<ul>
-<li>Explicit parallel execution</li>
-<li>Cores share resources:
-<ul>
-<li>caches</li>
-<li>memory</li>
-<li>IO</li>
-<li>System Interconnect</li>
-</ul>
-</li>
-</ul>
-<h3 id="turning-on-x86-cores"><a class="header" href="#turning-on-x86-cores">Turning on X86 Cores</a></h3>
-<ul>
-<li>one bootstrapping processor</li>
-<li>bios sets it up in a predefined memory region</li>
-<li>used to discover and configure carious hradware components</li>
-<li>locate the right data</li>
-<li>PICs aren't used anymore, (local) APIC replaced
-<ul>
-<li>localapic is in same memory for each processor since it's local</li>
-</ul>
-</li>
-</ul>
-<h3 id="starting-aps-application-processors"><a class="header" href="#starting-aps-application-processors">Starting APs (Application Processors)</a></h3>
-<ul>
-<li>Send init Inter Processor Interrupt</li>
-<li>send start-up IPI</li>
-<li>manage per-core kernel stack</li>
-</ul>
-<h3 id="end-of-multicore"><a class="header" href="#end-of-multicore">End of multicore</a></h3>
-<ul>
-<li>End of multicore scaling also due to a heat problem where switching cores</li>
-<li>solution is to turn of lots of cores</li>
-<li>specialized cores</li>
-<li>Turn cores on/off cores quickly</li>
-</ul>
-<h3 id="dealing-with-concurrency"><a class="header" href="#dealing-with-concurrency">Dealing with Concurrency</a></h3>
-<ul>
-<li>Each core has its own kernel</li>
-<li>data structures need to be shared and in a consistent state</li>
-<li>Solutions:
-<ul>
-<li>lock the state (performance problems)
-<ul>
-<li>spinlocks</li>
-<li>mutexes</li>
-<li>Read-copy-update (RCU)
-<ul>
-<li>use replication to make locks scalable</li>
-<li>contention on a single pointer and if there is write, expensive copy</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>partition the state (underutilization)</li>
-<li>replicate it (stale state)</li>
-</ul>
-</li>
-<li>start with locking, if performance becomes unbearable, try a different way</li>
-</ul>
-<h3 id="bkl"><a class="header" href="#bkl">BKL</a></h3>
-<ul>
-<li>simple and minimally complex</li>
-<li>cons: kernel execution becomes serialized</li>
-</ul>
-<h3 id="fine-grained-locking"><a class="header" href="#fine-grained-locking">Fine-grained locking</a></h3>
-<ul>
-<li>start with BKL and make locks smaller and smaller</li>
-<li>lock only each subsystem</li>
-<li>keep making locks finer and finer such that locks don't take up too much CPU</li>
-</ul>
-<h3 id="multicore-parallelism"><a class="header" href="#multicore-parallelism">Multicore Parallelism</a></h3>
-<ul>
-<li>needs multiple threads of execution</li>
-<li>user-mode applications can spawn threads
-<ul>
-<li>kernel schedules user-mode threads on top of idle core</li>
-</ul>
-</li>
-<li>parallelism for kernel tasks
-<ul>
-<li>post-interrupt work</li>
-<li>background maintenance</li>
-<li>filling up per-CPU frame caches</li>
-<li>writing dirty data to disk</li>
-<li>RCU garbage collection</li>
-</ul>
-</li>
-<li>Interrupt handlers do as little as possible <em>"top half"</em></li>
-<li>Deferred handling in interrupt execution context
-<ul>
-<li>no active process, no sleeping just spinlocks</li>
-</ul>
-</li>
-<li>Process execution context
-<ul>
-<li>workqueues / kernel threads</li>
-<li>active process</li>
-<li>sleep allowed, mutex possible</li>
-</ul>
-</li>
-</ul>
-<h3 id="bottom-halves"><a class="header" href="#bottom-halves">Bottom Halves</a></h3>
-<ul>
-<li>enqueue interrupt handling</li>
-<li>execute before returning to user mode</li>
-<li>only on BH at a time</li>
-<li>inefficient due to lack of parallelism
-<ul>
-<li>now obsolete</li>
-<li>replaced by softIRQs and tasklets</li>
-</ul>
-</li>
-</ul>
-<h3 id="softirq-vs-tasklets---modern-approach-to-bottom-halves"><a class="header" href="#softirq-vs-tasklets---modern-approach-to-bottom-halves">SoftIRQ vs Tasklets - modern approach to Bottom Halves</a></h3>
-<ul>
-<li>SoftIRQs
-<ul>
-<li>multiple instances of softirq run concurrently</li>
-<li>very efficient hard to program</li>
-<li>limited number available (32)</li>
-<li>High priority work (separated by priority)</li>
-<li>run concurrently on multiple CPUs</li>
-<li>Per-CPU bitmask of softirqs needing work</li>
-</ul>
-</li>
-<li>Tasklets
-<ul>
-<li>multiple tasklets run concurrently, but just one instance of each</li>
-<li>less concurrency, easier to program</li>
-<li>implemented on top of softirqs</li>
-<li>can dynamically register more</li>
-</ul>
-</li>
-<li>Linux Workqueues
-<ul>
-<li>softirqs and tasklets run in interrupt execution context</li>
-<li><code>ps aux | grep kworkers</code></li>
-</ul>
-</li>
-<li>Linux Kernel Threads
-<ul>
-<li>Unit of parallelism in the kernel</li>
-<li>use the wait-queue mechanism to get notified of jobs</li>
-</ul>
-</li>
-</ul>
-<h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
-<ul>
-<li>
-<p>How do you decide whether to turn a core off?</p>
-<ul>
-<li>which core? - thermals of neighbors</li>
-<li></li>
-</ul>
-</li>
-<li>
-<p>How do you decide whether to turn a core back on?</p>
-<ul>
-<li>if number of tasks increases / load increases</li>
-</ul>
-</li>
-<li>
-<p>Which multicore performance enhancements interfere?</p>
-<ul>
-<li>replication of data structures</li>
-<li>requires a global view and migration</li>
-</ul>
-</li>
-<li>
-<p>what can be done when there is heavy contention on a VMA for user allocation</p>
-<ul>
-<li>partition part of the memory to use core-local data structures for memory allocaitons</li>
-</ul>
-</li>
-<li>
-<p>For what kind of systems are these most suitable</p>
-<ul>
-<li>
-<p>explicit sharing</p>
-</li>
-<li>
-<p>barrelfish - heterogeneous CPUs</p>
-</li>
-<li>
-<p>Many core, NUMA/non cache coherent</p>
-</li>
-</ul>
-</li>
-</ul>
+                        <h1 id="advanced-operating-systems"><a class="header" href="#advanced-operating-systems">Advanced Operating Systems</a></h1>
+<p>An operating system is comprised of many layers of abstraction where each layer generally takes on a different responsibility. At the lowest level is the <strong>kernel</strong> which interacts directly with the hardware and runs with the highest level of privilege. Then the kernel is wrapped in a <em>"shell"</em> of <strong>system software</strong>. These are user space programs that interact with the kernel and provide critical functionality. Lastly, there is an optional <strong>desktop environment</strong> that provides a graphical user interface, if the OS is being used directly by end users.</p>
+<pre><code>     +--------------------------+
+     |   Desktop Environment    |
+     |  +--------------------+  |
+     |  |  System Software   |  |
+     |  |  +--------------+  |  |
+     |  |  |    Kernel    |  |  |
+     |  |  | +----------+ |  |  |
+     |  |  | | Hardware | |  |  |
+     +--------------------------+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../advanced-os/multiprocessing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../SoftwareTesting/techniques.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../AdvancedOperatingSystems/booting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -390,10 +204,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../advanced-os/multiprocessing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../SoftwareTesting/techniques.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../AdvancedOperatingSystems/booting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

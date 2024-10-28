@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="software-testing/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="advanced-os/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="advanced-os/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="advanced-os/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="advanced-os/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="advanced-os/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="SoftwareTesting/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="SoftwareTesting/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="SoftwareTesting/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="SoftwareTesting/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="SoftwareTesting/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="AdvancedOperatingSystems/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li><li class="chapter-item expanded "><a href="HardwareSecurity/index.html"><strong aria-hidden="true">4.</strong> Hardware Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="HardwareSecurity/dram.html"><strong aria-hidden="true">4.1.</strong> DRAM</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -1605,6 +1605,122 @@ schedule(); // invoke the scheduler
 </li>
 </ul>
 </li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hardware-security"><a class="header" href="#hardware-security">Hardware Security</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dram"><a class="header" href="#dram">DRAM</a></h1>
+<ul>
+<li>Dynamic Random Access Memory</li>
+<li>Organized in memory cells with 1-bit data</li>
+<li>Charge/Discharge capacitor requires refresh due to charge leak</li>
+<li>DRAM organization (aka "geometry"):
+<ul>
+<li>Channel - Some bits address which channel, each channel has a memory bus (data/control are separated) offers bus-level parallelism (128 bits per transfer)</li>
+<li>DIMM - Some bits address which DIMM</li>
+<li>Rank - Which <em>"side"</em> of the DIMM, can work independently, at any time only one rank can be active, over the bus requests are sent/seen by all ranks and only selected rank will react to request</li>
+<li>Chips - all chips on a rank are active during memory request "8x" Chips require 8 chips, since each does 8 bits for a 64 bit total.</li>
+<li>Banks - Spans all chips - addressed by some bits</li>
+<li>Rows - Rows in each bank - addressed by some bits</li>
+<li>Columns - addressed by some bits</li>
+</ul>
+</li>
+<li>Capacity = rows x columns x bytesPerColumn x banks x chips x ranks x DIMMs</li>
+<li>RowSize = columns x bytesPerColumn x Chips</li>
+</ul>
+<h2 id="read"><a class="header" href="#read">Read</a></h2>
+<ol>
+<li>RowBuffer = logically spans all chips data from row gets "moved destructively" from row into rowBuffer</li>
+<li>8 requests to read one cache line - read rowBuffer byte-by-byte</li>
+<li>Write rowBuffer back into row
+<ul>
+<li>When does rowBuffer get written back into row?</li>
+<li>Open-row policy: <em>MC expects more hits on the same row</em>
+<ul>
+<li>row kept open, optimizing for access locally</li>
+<li>we expect cheap row buffer hits</li>
+<li>but misses are more costly (need precharge)</li>
+</ul>
+</li>
+<li>Close-row policy: <em>MC expects requests for different rows</em>
+<ul>
+<li>precharge after access, optimizing for little locality</li>
+<li>we expect misses, eliminate precharge latency</li>
+</ul>
+</li>
+<li>MCs use proprietary policies, along with undocumented policies
+<ul>
+<li>(want to improve bank-level parallelism)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="address-mapping"><a class="header" href="#address-mapping">Address Mapping</a></h2>
+<ul>
+<li>physical address space != dram address space</li>
+<li>MC decides the mapping between physical addresses to dram addresses</li>
+<li>complex xor functions on all recent CPUs</li>
+<li>Mapping has an impact on performance <em>trade secret!</em></li>
+<li>Knowing mapping has security applications <em>dram side side channels!</em></li>
+</ul>
+<h2 id="proprietary-knowledge"><a class="header" href="#proprietary-knowledge">Proprietary Knowledge:</a></h2>
+<ul>
+<li>MC
+<ul>
+<li>policies: precharge, refresh, scheduling</li>
+<li>data encoding on the bus (ECC bits)</li>
+<li>physical -&gt; dram address mapping</li>
+</ul>
+</li>
+<li>DRAM might internally change row address mapping
+<ul>
+<li>improve routing on the board</li>
+<li>blacklist bad rows</li>
+<li>figuring this out is an open problem</li>
+</ul>
+</li>
+</ul>
+<h2 id="side-channel-with-rowbuffers"><a class="header" href="#side-channel-with-rowbuffers">Side Channel with RowBuffers</a></h2>
+<ul>
+<li>Reading data from non-activated rows will be slow</li>
+<li>Can find whether row was active or not based on this side channel</li>
+</ul>
+<h2 id="timing-attacks"><a class="header" href="#timing-attacks">Timing Attacks</a></h2>
+<ul>
+<li>Pros
+<ul>
+<li>not labour intensive</li>
+<li>special equipment not necessary</li>
+<li>can be done remotely</li>
+</ul>
+</li>
+<li>Cons
+<ul>
+<li>cannot look at data its</li>
+<li>cannot easily reconstruct address selection functions precisely</li>
+</ul>
+</li>
+<li>spy on victim core (repeated check for bank conflicts to detect victim accesses to that bank)</li>
+</ul>
+<h2 id="bus-probing"><a class="header" href="#bus-probing">Bus Probing</a></h2>
+<ul>
+<li>Pros:
+<ul>
+<li>precise</li>
+<li>analyze one bit at a time with different addresses</li>
+<li>can look at both address and data bits</li>
+</ul>
+</li>
+<li>Cons:
+<ul>
+<li>labour-intensive</li>
+<li>expensive equipment</li>
+</ul>
+</li>
+</ul>
+<h1 id="questions-9"><a class="header" href="#questions-9">Questions</a></h1>
+<ul>
+<li>Why is there a distinction between chips and banks (chips aren't addressed in the physical address)?</li>
+<li>Are there any relations to CPU optimizations to memory access patterns in DIM?</li>
 </ul>
 
                     </main>

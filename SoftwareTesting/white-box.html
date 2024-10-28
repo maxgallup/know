@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>User Mode - Knowledge Base</title>
+        <title>White Box Testing - Knowledge Base</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../software-testing/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../software-testing/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../software-testing/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="../software-testing/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="../advanced-os/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../advanced-os/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../advanced-os/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../advanced-os/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../advanced-os/user-mode.html" class="active"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../advanced-os/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="../advanced-os/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../advanced-os/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="../advanced-os/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="../advanced-os/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SoftwareTesting/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/white-box.html" class="active"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li><li class="chapter-item expanded "><a href="../HardwareSecurity/index.html"><strong aria-hidden="true">4.</strong> Hardware Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../HardwareSecurity/dram.html"><strong aria-hidden="true">4.1.</strong> DRAM</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,121 +173,71 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="user-mode"><a class="header" href="#user-mode">User Mode</a></h1>
-<p>Any OS will make sure that sys resources can be multiplexed by competing applications. Should happen safely and efficiently. CPU provides support for privileged instructions</p>
-<h3 id="privilege-separation"><a class="header" href="#privilege-separation">Privilege Separation</a></h3>
+                        <h1 id="white-box-testing"><a class="header" href="#white-box-testing">White-Box Testing</a></h1>
+<p>Performing tests on software with the source code available. Generally, one should follow the following methodology:</p>
+<ol>
+<li>Make a prioritized list of your "nightmares".</li>
+<li>Which bugs can lead to the nightmares?</li>
+<li>Apply testing techniques that are best suited for detecting these bugs.</li>
+<li>Gather enough evidence to that there the likelihood of a nightmare scenario is negligible, at which point stop testing.</li>
+</ol>
+<p>Static Analysis is one of the most powerful tools, leveraging compilers and linting is a must.</p>
+<h3 id="control-flow-testing"><a class="header" href="#control-flow-testing">Control-Flow Testing</a></h3>
+<p>Testing coverage is a measure of completeness of the set of test cases and shows how much code has been exercised during testing.</p>
 <ul>
 <li>
-<p>x86 has 4 rings of privilege</p>
-<ul>
-<li>ring 0: runs kernel, most privileges</li>
-<li>ring 1,2: unused</li>
-<li>ring 3: user code</li>
-</ul>
+<p><strong>Level 1 Statement Coverage</strong> - Weakest criteria, ensures that every statement in code has been executed at least once.</p>
 </li>
 <li>
-<p>Pointers can be associated either with:</p>
-<ul>
-<li>Code segments (CS)</li>
-<li>Data segments (DS) - heap pointer</li>
-<li>Stack Segment (SS) - Local variable pointer</li>
-</ul>
+<p><strong>Level 2 Decision Coverage</strong> - Ensures that the decision of all branches has been taken at least once. Includes statement coverage.</p>
 </li>
 <li>
-<p>CS:0x1000 can be different than DS:0x1000</p>
+<p><strong>Level 3 Condition Coverage</strong> - Ensures that every "simple" condition has been evaluated with both true and false. This doesn't mean that all "composite" conditions have been extensively evaluated.</p>
 </li>
 <li>
-<p>However, today all segments point to same memory</p>
+<p><strong>Level 4 Decision/Condition Coverage</strong> - All conditions and decisions is evaluated with both values. In this case decisions can be the composition of multiple conditions.</p>
 </li>
 <li>
-<p>low-order 2 bits of CS register determine current ring</p>
+<p><strong>Level 5 Multiple Condition Coverage</strong> - Requires that all combinations of "simple" conditions are covered.</p>
 </li>
 <li>
-<p>No instruction sets CS register directly</p>
-<ul>
-<li>From user -&gt; Kernel
-<ul>
-<li>interrupt CPU ("int" instruction) actually sets CS to 0x00</li>
-<li>CPU switches to interrupt handler in kernel (from interrupt table containing functions)</li>
-</ul>
-</li>
-<li>From kernel -&gt; user mode
-<ul>
-<li>Kernel interrupt handler returns ("iret" instruction)</li>
-<li>CPU restores user mode state, including CS</li>
-</ul>
-</li>
-</ul>
+<p><strong>Level 6 Modified Condition/Decision Coverage</strong> - Requires that all decisions have been covered, that all simple conditions have been evaluated with both true and false, and that each simple condition within all compound conditions has been shown to independently effect outcome of the compound condition.</p>
 </li>
 <li>
-<p>segments are registers which makes them selectors from a table (GDT)</p>
+<p><strong>Level 7 Full Path Coverage</strong> - Fully exhaustive white box testing, but tends to be infeasible.</p>
 </li>
 </ul>
-<h4 id="global-descriptor-table"><a class="header" href="#global-descriptor-table">Global Descriptor Table</a></h4>
+<h3 id="data-flow-testing"><a class="header" href="#data-flow-testing">Data-Flow Testing</a></h3>
+<p>The aim is to trim the set of test cases that we are interested in. Increases the chance of spending more time looking at paths that include potential software faults.</p>
 <ul>
-<li>contains information on segments, code segment selector is an offset into GDT</li>
-<li>specifies all the segments and different rings</li>
-<li>GDTR register points to the GDT</li>
-<li>DPL Field decides which ring can access memory</li>
+<li>All <em>Def-Use</em> Paths: test cases must exercise all paths that involve a definition and use of variables of interest.</li>
 </ul>
-<h1 id="task-struct-linux"><a class="header" href="#task-struct-linux">Task struct (linux)</a></h1>
+<h3 id="test-adequacy"><a class="header" href="#test-adequacy">Test Adequacy</a></h3>
+<p>When has a program been sufficiently tested? A test adequacy criterion such as Mutant Score, reveals how well our test cases are performing.</p>
+<blockquote>
+<p><strong>Definition:</strong>
+A code mutant is a version of the software under test that underwent some form of mutation, for example, arithmetic operators have been replaced.</p>
+</blockquote>
+<p>Mutants can survive if their output is correct for any given test case. Survivors are analyzed to improve test cases. However, some (equivalent) mutants might never be killed. Mutant Score is defined as <code>#killed_mutants / #total_mutants</code>.</p>
+<h3 id="unit-testing"><a class="header" href="#unit-testing">Unit Testing</a></h3>
+<p>Testing an individual module / component of a system. In practice, this is testing of a single method or class. <a href="https://en.wikipedia.org/wiki/Unit_testing">(wiki)</a></p>
+<h3 id="integration-testing"><a class="header" href="#integration-testing">Integration Testing</a></h3>
+<p>Testing the multiple parts of the system as a group. Typically it follows after modules have been unit tested. <a href="https://en.wikipedia.org/wiki/Integration_testing">(wiki)</a></p>
 <ul>
-<li>Task is a generalization of a process and a thread</li>
-<li>contains pid, parent_pid, frame of registers and pointer to page_table</li>
-<li>contains a specific state, stack pointer, which cpu, memory management, credentials, open files that process can access</li>
-</ul>
-<h1 id="security"><a class="header" href="#security">Security</a></h1>
-<ul>
-<li>
-<p>Meltdown</p>
-<ul>
-<li>speculative code reads data into cache</li>
-<li>KPTI Kernel Page Table Isolation, performance hit</li>
-</ul>
-</li>
-<li>
-<p>Foreshadow</p>
-<ul>
-<li>PTE address bits must also be cleared</li>
-</ul>
-</li>
-<li>
-<p>RIDL</p>
-<ul>
-<li>bypasses the address bits</li>
-<li>ver instruction flushes address</li>
-<li>SMEP - supervisor mode execution protection (always on)</li>
-<li>SMAP - supervisor mode access protection (copy_to / from_user) - specific instructions exist to temporarily disable SMAP</li>
-</ul>
-</li>
-<li>
-<p>Defending Kernel Attacks: prevent kernel vulnerabilities from directing control flow to user land code by enabling SMAP Supervisor Mode Access Protection</p>
-</li>
-<li>
-<p>ASLR: user process randomization</p>
-<ul>
-<li>linux mmap provides 28 bits of entropy</li>
-</ul>
-</li>
-</ul>
-<h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
-<ul>
-<li>Where does it store user mode state?</li>
-<li>Where is GDT stored and who is responsible for it?</li>
-<li>What is the minimum of kernel code needed to map into a process? interrupt handler and sys calls, kernel stack, trampoline to kernel.</li>
-<li>How can processes have different privilege levels? - Task structs can add another level of privileges between user processes.</li>
-<li>If user code is no-pie, you can still always randomize the stack and heap.</li>
+<li><em>big-bang</em> - modules are coupled together to form a complete system that is tested</li>
+<li><em>top-down</em> - start with highest level module and then test step by step down incrementally</li>
+<li><em>bottom-up</em> - start with the lowest level module, test your way up by integrating</li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../advanced-os/page-tables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../SoftwareTesting/srs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../advanced-os/interrupts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../SoftwareTesting/black-box.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -297,11 +247,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../advanced-os/page-tables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../SoftwareTesting/srs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../advanced-os/interrupts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../SoftwareTesting/black-box.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
