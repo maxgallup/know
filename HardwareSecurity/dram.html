@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SoftwareTesting/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li><li class="chapter-item expanded "><a href="../HardwareSecurity/index.html"><strong aria-hidden="true">4.</strong> Hardware Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../HardwareSecurity/dram.html" class="active"><strong aria-hidden="true">4.1.</strong> DRAM</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> Knowledge Base</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/index.html"><strong aria-hidden="true">2.</strong> Software Testing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../SoftwareTesting/srs.html"><strong aria-hidden="true">2.1.</strong> Software Requirements Specification</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/white-box.html"><strong aria-hidden="true">2.2.</strong> White Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/black-box.html"><strong aria-hidden="true">2.3.</strong> Black Box Testing</a></li><li class="chapter-item expanded "><a href="../SoftwareTesting/techniques.html"><strong aria-hidden="true">2.4.</strong> Techniques</a></li></ol></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/index.html"><strong aria-hidden="true">3.</strong> Advanced Operating Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/booting.html"><strong aria-hidden="true">3.1.</strong> Booting</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/memory.html"><strong aria-hidden="true">3.2.</strong> Memory</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/page-tables.html"><strong aria-hidden="true">3.3.</strong> Page Tables</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/user-mode.html"><strong aria-hidden="true">3.4.</strong> User Mode</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/interrupts.html"><strong aria-hidden="true">3.5.</strong> Interrupts</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/system-calls.html"><strong aria-hidden="true">3.6.</strong> System Calls</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/paging.html"><strong aria-hidden="true">3.7.</strong> Paging</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multiprocessing.html"><strong aria-hidden="true">3.8.</strong> Multi-Processing</a></li><li class="chapter-item expanded "><a href="../AdvancedOperatingSystems/multicore.html"><strong aria-hidden="true">3.9.</strong> Multi-Core</a></li></ol></li><li class="chapter-item expanded "><a href="../HardwareSecurity/index.html"><strong aria-hidden="true">4.</strong> Hardware Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../HardwareSecurity/dram.html" class="active"><strong aria-hidden="true">4.1.</strong> DRAM</a></li></ol></li><li class="chapter-item expanded "><a href="../PerformanceOfNetworkedSystems/index.html"><strong aria-hidden="true">5.</strong> Performance Of Networked Systems</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -180,6 +180,7 @@
 <li>Charge/Discharge capacitor requires refresh due to charge leak</li>
 <li>DRAM organization (aka "geometry"):
 <ul>
+<li>Index - lowest 3 bits access which byte within the 8 byte channel to target</li>
 <li>Channel - Some bits address which channel, each channel has a memory bus (data/control are separated) offers bus-level parallelism (128 bits per transfer)</li>
 <li>DIMM - Some bits address which DIMM</li>
 <li>Rank - Which <em>"side"</em> of the DIMM, can work independently, at any time only one rank can be active, over the bus requests are sent/seen by all ranks and only selected rank will react to request</li>
@@ -283,10 +284,120 @@
 </ul>
 </li>
 </ul>
+<h1 id="rowhammer"><a class="header" href="#rowhammer">Rowhammer</a></h1>
+<p>Found in 2014, still present in DDR2, DDR3 and DDR4. Modern defect, in all DRAM modules. All an attacker has to do, is make precise access patterns to flip a row in the RAM module. First, must know the physical -&gt; dram mapping. (Double sided row-hammer)</p>
+<ol>
+<li>Activate Row 0</li>
+<li>Activate Row 2</li>
+</ol>
+<p>Result: Cells in Row 1 will bitflip because of leaked charge, before dram gets to refresh the charge.</p>
+<ul>
+<li>Can lead to privilege escalation</li>
+</ul>
+<h3 id="rowhammer-mitigations"><a class="header" href="#rowhammer-mitigations">Rowhammer Mitigations</a></h3>
+<ul>
+<li>ECC memory</li>
+<li>Target Row Refresh, Make the DRAM module refresh the capacitors faster than rowhammer can leak charges.</li>
+<li>Disable software features that make it easier
+<ul>
+<li>disable pagemap for unprivileged users</li>
+<li>disable specific DMA allocators (uncached memory), (ION allocator in android) memory deduplication</li>
+</ul>
+</li>
+<li>Software mitigations
+<ul>
+<li>ZebRAM (OSDI 18), Throwhammer (ATC 18)</li>
+<li>Drammer (CCS 16)</li>
+<li>Hammertime (RAID 18)</li>
+</ul>
+</li>
+</ul>
+<h3 id="knowing-the-data-encoding"><a class="header" href="#knowing-the-data-encoding">Knowing the data encoding</a></h3>
+<ul>
+<li>ECC Memory, uses 72 lines instead of 64</li>
+<li>ECC Function that maps data to which is secret (security by obscurity)</li>
+<li>Inject errors with a needle to shortcircuit a bit</li>
+<li>Data patterns reconstruct the</li>
+</ul>
+<h3 id="eccploit"><a class="header" href="#eccploit">ECCploit</a></h3>
+<ul>
+<li>After 1 year, over different memroy there is a fraction that canbe exploited on ECC Memory, after knowing the mapping it is still possible to recreate all exploits on ECC</li>
+</ul>
+<h3 id="trrespass"><a class="header" href="#trrespass">TRRespass</a></h3>
+<ul>
+<li>Target row refresh is sampled, all practical implementations are limited.</li>
+<li>known as "Many Sided Rowhammer", overwhelm sampler to bypass TRR
+<ul>
+<li>SMASH applies this technique even from JS in the browser</li>
+</ul>
+</li>
+<li>Other Flavors:
+<ul>
+<li>Blacksmith (non-uniform patterns to break TRR solutions)</li>
+<li>Half Double (exploits TRR) uses far agressor rows to trigger hammer itself</li>
+</ul>
+</li>
+<li>Rowhammer as a sidechannel
+<ul>
+<li>RAMBLEED observe bit flips to leak victim data</li>
+<li>HammerScope observe flips to leak DRAM power usage</li>
+<li>SpyHammer observe flips to leak DRAM temperature</li>
+</ul>
+</li>
+</ul>
+<h1 id="cold-boot-attack"><a class="header" href="#cold-boot-attack">Cold Boot Attack</a></h1>
+<ul>
+<li>Threa model: stolen laptop</li>
+<li>DRAM holds secrets</li>
+<li>DRAM keeps charge for a while even is they are not refreshed, Longer if cold!</li>
+</ul>
+<ol>
+<li>Cool DIMMS with a spray</li>
+<li>shut the laptop down</li>
+<li>usb-boot into a malicious OS or move DIMM</li>
+<li>read any sensitive data</li>
+</ol>
+<ul>
+<li>Mitigations:
+<ul>
+<li>data scrambling, (however weak encryption, still broken) Paper: <em>Cold boot attacks are stil hot</em></li>
+</ul>
+</li>
+</ul>
+<h1 id="dram-address-translation"><a class="header" href="#dram-address-translation">DRAM Address Translation</a></h1>
+<ul>
+<li>MMU: maps virtual to physical memory
+<ul>
+<li>virtualize physical memory</li>
+<li>flexible memory management</li>
+<li>isolation and protection</li>
+</ul>
+</li>
+<li>MMU uses caching to make performance acceptable</li>
+</ul>
 <h1 id="questions"><a class="header" href="#questions">Questions</a></h1>
 <ul>
-<li>Why is there a distinction between chips and banks (chips aren't addressed in the physical address)?</li>
-<li>Are there any relations to CPU optimizations to memory access patterns in DIM?</li>
+<li>
+<p>Why is there a distinction between chips and banks (chips aren't addressed in the physical address)?</p>
+<ul>
+<li>Since chips are accessed all at once, banks are a slice into all chips.</li>
+</ul>
+</li>
+<li>
+<p>Are there any relations to CPU optimizations to memory access patterns in DIM?</p>
+</li>
+<li>
+<p>Channel addresses are low, because implementing channel-level parallelism is implemented this way.</p>
+</li>
+<li>
+<p>Why are column addresses low?</p>
+<ul>
+<li>Due to locality there will be similar local rows in the same column which maximize row buffer hit rate</li>
+</ul>
+</li>
+<li>
+<p>typically switch dimm and rank address to spread out address targeting to maximize bank level optimization</p>
+</li>
 </ul>
 
                     </main>
@@ -297,6 +408,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../PerformanceOfNetworkedSystems/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -308,6 +422,9 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../PerformanceOfNetworkedSystems/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
