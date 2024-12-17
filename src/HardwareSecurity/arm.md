@@ -40,12 +40,22 @@
 
 ```
 LDR r0, [pc, #16] // loads pc + 16 into r0
-STR r0, [r4, #0]  // stores value from memory at r4 + 0
+STR r0, [r4, #0]  // stores value from r0 memory at r4 + 0
 ```
 
 
 ## Branch
 * some instructions include branch and exchange where you change the instructions set to 'thumb mode'
+
+
+
+
+
+
+# Arm Exploitation
+## Shellcode
+* nullbyte free shellcode in thumb mode
+
 
 
 
